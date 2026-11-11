@@ -1,0 +1,90 @@
+<!--
+  TradePath Training Centre HUD — real UIKitML (Horizon kit).
+  Wired at runtime by TradePathSystem in src/tradepath.ts via the scene node
+  id "tradepath-hud-panel". Element ids below are the contract: hud-zone,
+  hud-session, hud-step, hud-xp, hud-flow, hud-next-skills, hud-hint,
+  hud-hint-button, hud-reset-button.
+-->
+<style>
+  .panel-root {
+    flex-direction: column;
+    width: 420px;
+  }
+
+  .panel-content {
+    flex-direction: column;
+    gap: 7px;
+    padding: 22px;
+  }
+
+  .eyebrow {
+    color: #6b5a00;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+  }
+
+  .eyebrow:dark {
+    color: #f5d90a;
+  }
+
+  .heading {
+    color: #1c1d20;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 34px;
+  }
+
+  .heading:dark {
+    color: #fafaf7;
+  }
+
+  .body {
+    color: #3a3b40;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  .body:dark {
+    color: #dddfe3;
+  }
+
+  .hint {
+    color: #1d4ed8;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  .hint:dark {
+    color: #93c5fd;
+  }
+
+  .button {
+    justify-content: flex-start;
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-bottom: 12px;
+  }
+
+  .button-label {
+    transform-translate-y: 1px;
+  }
+</style>
+<Panel class="panel-root">
+  <div class="panel-content">
+    <div class="eyebrow">TRADEPATH TRAINING CENTRE</div>
+    <div id="hud-zone" class="heading">Zone: —</div>
+    <div id="hud-session" class="body">Session: —</div>
+    <div id="hud-step" class="body">Step —/—</div>
+    <div id="hud-xp" class="body">XP: 0</div>
+    <div id="hud-flow" class="body">Flow Meter: 50/100</div>
+    <div id="hud-next-skills" class="body">Next 3 skills: —</div>
+    <div id="hud-hint" class="hint">Walk to a zone. Press a checkpoint ring to complete a step; press the coach (or Ask coach) for a hint.</div>
+  </div>
+  <Button id="hud-hint-button" class="button">
+    <ButtonLabel class="button-label">Ask coach for a hint</ButtonLabel>
+  </Button>
+  <Button id="hud-reset-button" class="button">
+    <ButtonLabel class="button-label">Restart this session</ButtonLabel>
+  </Button>
+</Panel>

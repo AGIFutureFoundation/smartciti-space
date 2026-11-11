@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TradeQuest — Union Training Modules · SmartCiti.X</title>
+<style>
+:root{--bg:#0b1220;--panel:#131e33;--ink:#e8eefc;--mut:#9fb0d0;--acc:#ffb020;--ok:#2fbf71;--line:#26344f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+main{max-width:900px;margin:0 auto;padding:0 14px 48px}
+a{color:#7cc4ff}
+h1{font-size:1.6rem;margin:.4rem 0 .2rem}
+h2{font-size:1.25rem;margin:0 0 .5rem}
+h3{font-size:1.05rem;margin:1.1rem 0 .3rem;color:var(--acc)}
+p{margin:.4rem 0}
+nav.hub{display:flex;gap:16px;flex-wrap:wrap;align-items:center;background:#132238;padding:9px 16px;font-size:.95rem}
+nav.hub strong{color:#ff6b1a}
+nav.hub a{color:#eef2f7;text-decoration:none}
+nav.hub a:hover{text-decoration:underline}
+.banner{border-radius:10px;padding:.8rem 1rem;margin:.7rem 0;font-size:.95rem}
+.banner.demo{background:#3a2f00;border:1px solid #8a6d00;color:#ffe9a8}
+.banner.proposed{background:#2a1414;border:1px solid #7a2b2b;color:#ffc9c9}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;margin:1rem 0}
+.mut{color:var(--mut);font-size:.92rem}
+.small{font-size:.85rem}
+button{font:inherit;cursor:pointer;min-height:44px;border-radius:10px;border:1px solid var(--line);background:#1a2c52;color:var(--ink);padding:.6rem 1rem}
+button:hover{border-color:var(--acc)}
+.bigbtn{display:block;width:100%;text-align:center;background:var(--acc);color:#1a1200;font-weight:800;font-size:1.05rem;border:none;border-radius:12px;padding:1rem .8rem;cursor:pointer;text-decoration:none;min-height:56px;margin:.4rem 0}
+.bigbtn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line);font-size:1rem}
+.scen{width:100%;text-align:left;margin:.4rem 0}
+.scen b{display:block;font-size:1.05rem}
+.badge{float:right;border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;font-size:.8rem;color:var(--mut)}
+.badge.done{border-color:var(--ok);color:var(--ok)}
+.steps,.objs{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.objs li{border:1px solid var(--line);border-radius:10px;padding:.55rem .8rem;background:#0d1730}
+.step{border:2px solid var(--line);border-radius:12px;padding:.9rem;background:#0d1730;cursor:pointer;min-height:44px}
+.step.done{border-color:var(--ok)}
+.step .n{display:inline-block;width:2rem;height:2rem;line-height:2rem;text-align:center;border-radius:50%;background:#22345c;font-weight:800;margin-right:.4rem}
+.step.done .n{background:var(--ok);color:#04160b}
+.progress{height:14px;border-radius:7px;background:#22345c;overflow:hidden;margin:.5rem 0}
+.progress>i{display:block;height:100%;background:var(--ok)}
+details{border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:.5rem 0;background:#0d1730}
+summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+code{background:#0d1730;padding:.1rem .35rem;border-radius:5px}
+@media(max-width:560px){h1{font-size:1.35rem}}
+</style>
+</head>
+<body>
+<nav class="hub"><strong>SmartCiti.X</strong><a href="../index.html">Hub</a><a href="../learner/index.html">TradeQuest learner app</a><a href="../dashboard-v2-demo.html">Cohort dashboard</a><a href="../vr-entry/index.html">VR entry &amp; skill graph</a></nav>
+<main>
+<h1>TradeQuest — Union Training Modules</h1>
+<p class="mut">Ten modular training environments. Each module is one trade scenario:
+read the objectives, work the five steps in order at their stations, and check
+each step off as you complete it. Your progress is saved on this device only —
+nothing is stored on a server or sent anywhere.</p>
+<div class="banner demo"><strong>Demo mode — sample training content.</strong>
+Simulation only — NOT certification, licensure, or an apprenticeship credential.</div>
+<div class="banner proposed"><strong>SmartCiti.X is proposed, not incorporated /
+funded / offered.</strong> Louisiana + Indiana training sites are
+proposed/planned — no site, city, or address has been named. The 111-hall
+roster in the SmartCiti.X bundle is an in-repo list; 0 of 111 halls are signed
+off by a named practitioner — a named hall is not a partner, and trade
+organisations named in module sources are alignment references, not partners.</div>
+<div id="list" class="card"><h2>Modules</h2><p id="overall" class="mut"></p><div id="scenarioList"></div></div>
+<div id="detail" class="card" hidden>
+  <button id="backBtn" type="button">&larr; All modules</button>
+  <h2 id="dTitle"></h2>
+  <p id="dDesc"></p>
+  <p><span id="dMeta"></span></p>
+  <h3>Objectives — by the end of this module you can:</h3>
+  <ul class="objs" id="dObjs"></ul>
+  <div class="progress" aria-hidden="true"><i id="dBar" style="width:0%"></i></div>
+  <p id="dCount" class="mut">0 of 5 steps complete</p>
+  <ol id="dSteps" class="steps"></ol>
+  <p>
+    <button id="resetBtn" type="button">Restart this module</button>
+  </p>
+  <div id="dLinks"></div>
+  <details><summary>Sources &amp; honesty notes</summary><div id="dSources"></div></details>
+</div>
+<div class="card">
+  <h2>Where this fits</h2>
+  <p><a href="../learner/index.html">TradeQuest learner app</a> — paste a job
+  posting, get your next 3 skills, and walk the skill graph.
+  <a href="../vr-entry/index.html">Learner VR Entry</a> — skill graph, Holodeck
+  Coach, and the Holodeck link. <a href="../dashboard-v2-demo.html">Cohort
+  Dashboard v2 (demo)</a> — sample learner progress.
+  <a href="../learner-progress-contract.json">LearnerProgressEvent contract</a>.</p>
+  <p class="mut small">Holodeck deep links open the matching zone in the IWSDK
+  Training Centre bundled at <code>../holodeck/</code> (electrical, HVAC,
+  outreach). Module data lives in <code>modules/*.json</code>; this page embeds
+  the same data so it works from <code>file://</code> with zero network requests.</p>
+</div>
+</main>
+<script>
+"use strict";
+/* Module data — matches modules/*.json (the six source modules are byte-true
+   copies of the SmartCiti.X scenario set; objectives for those six are
+   supplied here and in the hub catalog, the four union modules added
+   2026-11-10 carry objectives in their JSON files too). */
+const MODULES = [
+{"id":"safety-procedures","group":"start","audience":"All learners, before any trade task (cross-cutting)","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"Safety procedures every learner runs before any trade task: identify the hazards, select PPE, check the fit, work the task, and report. Grounded in the OSHA PPE topic page: PPE is equipment worn to minimise exposure to hazards; employers must provide it and train workers on when it is necessary, what kind, how to put it on / adjust / wear / take it off, its limitations, and its care, maintenance, useful life, and disposal; a PPE programme addresses hazards, selection, maintenance, use, training, and monitoring. Simulation only — not certification.","halls":{"mapped_hall":null,"note":"No hall mapped. Applies in every hall and bay; hall mapping is open (Phase 4)."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Name the hazards in a bay before touching any tool","Select the PPE each hazard calls for","Fit-check PPE and note its limitations","Work the task with PPE on and the floor kept clear","Log the run and report near-misses instead of hiding them"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["OSHA PPE topic page (osha.gov/personal-protective-equipment): PPE definition, training requirements, PPE programme elements."],"stations":[{"id":"safety-hazard-board","title":"Hazard board — hazard list for the bay"},{"id":"safety-ppe-station","title":"Safety station — PPE, first aid, extinguisher"},{"id":"safety-report-desk","title":"Report desk — incident and near-miss log"}],"steps":[{"action":"Hazard board: name the hazards in this bay before touching any tool.","check":"Hazards named; controls noted.","stationId":"safety-hazard-board"},{"action":"Select the PPE the hazards call for (gloves, glasses, ear protection, hard hat, respirator as needed).","check":"PPE selected for every named hazard.","stationId":"safety-ppe-station"},{"action":"Fit check: put PPE on, adjust it, and confirm it fits comfortably.","check":"PPE fits; limitations noted.","stationId":"safety-ppe-station"},{"action":"Work the task with PPE on; keep the floor clear and the first-aid point known.","check":"Task done; area clear.","stationId":"safety-ppe-station"},{"action":"Report: log the run and any near-miss at the report desk.","check":"Log complete; near-misses reported, not hidden.","stationId":"safety-report-desk"}],"strands":["safety","procedure","documentation"],"tiers":["fundamentals"],"title":"Safety procedures — hazards, PPE, fit, report"},
+{"id":"union-trades-electrical","group":"union","audience":"Union trades learners (electrical)","deep_links":{"tradepath_zone":"electrical","vr_entry":"../vr-entry/index.html"},"description":"Union trades electrical sequence: PPE and verify-dead, read the schematic, bend conduit, land conductors, test and debrief. Mirrors the TradeQuest Electrical zone (same steps, same stations) so the learner can run it in the Holodeck. Simulation only — not certification, not licensure, not an apprenticeship credential.","halls":{"mapped_hall":null,"note":"No hall mapped. Trade halls in the Holodeck player (per vr-entry README): Ironworkers, Welding Trades, Boilermakers, Millwrights. Hall mapping is open (Phase 4). The 111-hall roster in the SmartCiti.X bundle is an in-repo list; 0 of 111 signed off by a named practitioner — a named hall is not a partner."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Verify a panel is dead before touching it","Read a schematic and name every circuit on the panel","Measure, mark and bend conduit to a planned run","Land conductors in schematic order, torqued","Test the install and debrief with the coach"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["TradeQuest centre JSON — Electrical zone session + next-3 skills (Electrical Theory Fundamentals, Conduit Bending, Blueprint & Schematic Reading).","OSHA PPE topic page (osha.gov/personal-protective-equipment)."],"stations":[{"id":"electrical-safety","title":"Safety station — PPE, first aid, extinguisher"},{"id":"electrical-panelboard","title":"Panel board — distribution panel + conduit runs"},{"id":"electrical-workbench","title":"Workbench — conduit bender, tools, measuring"}],"steps":[{"action":"PPE check + verify the panel dead before touching it.","check":"PPE fits, panel verified dead.","stationId":"electrical-safety"},{"action":"Read the schematic and identify each circuit on the panel.","check":"Every circuit named from the schematic.","stationId":"electrical-panelboard"},{"action":"Measure, mark, and bend the conduit to the planned run.","check":"Bend matches the plan; no rework needed.","stationId":"electrical-workbench"},{"action":"Mount the panel and land conductors in schematic order.","check":"Conductors landed in order, torqued.","stationId":"electrical-panelboard"},{"action":"Test, torque-check, and debrief with the coach.","check":"Test passed; debrief complete.","stationId":"electrical-workbench"}],"strands":["procedure","tools","safety","layout"],"tiers":["applied"],"title":"Union trades — electrical: panel & conduit install"},
+{"id":"union-trades-hvac","group":"union","audience":"Union trades learners (HVAC)","deep_links":{"tradepath_zone":"hvac","vr_entry":"../vr-entry/index.html"},"description":"Union trades HVAC sequence: PPE and recovery plan, diagnose from pressures/temperatures/airflow together, braze with nitrogen purge and leak-check, evacuate/charge/commission, record and debrief. Grounded in EPA Section 608: never intentionally vent refrigerant; certification is an external EPA 608 exam. Simulation only — not certification, not licensure.","halls":{"mapped_hall":null,"note":"No hall mapped. Trade halls in the Holodeck player (per vr-entry README): Ironworkers, Welding Trades, Boilermakers, Millwrights. Hall mapping is open (Phase 4)."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Plan refrigerant recovery — never vent (EPA Section 608)","Diagnose from pressures, temperatures and airflow read together","Braze a line set with a nitrogen purge, then leak-check","Evacuate, charge and commission the unit","Record the readings — and know certification is an external exam"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["EPA Section 608 (epa.gov/section608; 40 CFR Part 82, Subpart F, Clean Air Act): prohibits intentionally venting ozone-depleting refrigerants and substitutes (e.g. HFCs) during maintenance, service, repair, or disposal; technician certification programmes exist.","TradeQuest centre JSON — HVAC zone session + next-3 skills (Refrigeration Cycle & Diagnostics, Brazing & Copper Line Sets, EPA 608 Prep)."],"stations":[{"id":"hvac-safety","title":"Safety station — PPE, first aid, extinguisher"},{"id":"hvac-condenser","title":"Condenser unit — outdoor unit + copper lines"},{"id":"hvac-brazingbench","title":"Brazing bench — torch, manifold gauges, nitrogen"}],"steps":[{"action":"PPE check + recovery plan. Never vent refrigerant (Section 608).","check":"PPE fits; recovery machine ready.","stationId":"hvac-safety"},{"action":"Diagnose: read pressures, temperatures, and airflow together.","check":"Diagnosis named from all three readings.","stationId":"hvac-condenser"},{"action":"Braze the copper line set with a nitrogen purge, then leak-check.","check":"Joint brazed, purge done, no leaks.","stationId":"hvac-brazingbench"},{"action":"Evacuate, charge, and commission the unit.","check":"Charge correct; unit commissioned.","stationId":"hvac-condenser"},{"action":"Record the readings and debrief. EPA 608 certification is an external exam — this run does not certify.","check":"Readings recorded; debrief complete.","stationId":"hvac-brazingbench"}],"strands":["procedure","safety","machines","troubleshooting"],"tiers":["applied"],"title":"Union trades — HVAC: diagnose, braze & commission"},
+{"id":"union-trades-hazmat-abatement","group":"union","audience":"Union trades learners (laborers — hazmat & abatement)","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"Union trades laborers sequence for hazmat awareness and abatement support: read the job hazard analysis, suit up with a seal check, build containment with negative air and a decon corridor, work wet methods only, then bag, label, decon out and complete the waste manifest. Aligned to the hazmat/abatement core of laborers' training catalogues (Laborers' Training Center of Northern California — alignment from the 2026-11-10 industry pass, not a partnership). Simulation only — not HAZWOPER certification, not an asbestos or lead worker/supervisor licence, not an apprenticeship credential.","halls":{"mapped_hall":null,"note":"No hall mapped. Hall mapping is open (Phase 4). The 111-hall roster in the SmartCiti.X bundle is an in-repo list; 0 of 111 signed off by a named practitioner — a named hall is not a partner."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Read a job hazard analysis and name the stop-work triggers","Don a respirator and suit and pass a seal and buddy check","Build containment with negative air and a three-stage decon corridor","Work wet methods only — no dry sweeping, no visible dust","Bag, label and manifest regulated waste, and decon out in order"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["OSHA asbestos topic page and standards (osha.gov/asbestos): regulated areas, exposure controls, wet methods, housekeeping and waste rules for asbestos work.","OSHA lead in construction topic page (osha.gov/lead): exposure assessment and hygiene/decontamination practice.","OSHA PPE topic page (osha.gov/personal-protective-equipment): respirator fit, seal checks, limitations.","Industry pass 1 (2026-11-10): Laborers' Training Center of Northern California catalogue is hazmat/abatement training — alignment reference only."],"stations":[{"id":"hazmat-briefing","title":"Briefing board — job hazard analysis, exposure controls posted"},{"id":"hazmat-containment","title":"Containment — sealed work area, negative-air machine, decon corridor"},{"id":"hazmat-waste","title":"Waste & decon desk — labelled bags, decon line, manifest forms"}],"steps":[{"action":"Briefing: read the job hazard analysis. Name the material (asbestos or lead), the exposure controls for this job, and the stop-work triggers.","check":"Hazards, controls and stop-work triggers named.","stationId":"hazmat-briefing"},{"action":"PPE: don the respirator and suit; run the fit/seal check and a buddy check before crossing into the work area.","check":"Seal check passed; buddy confirmed.","stationId":"hazmat-containment"},{"action":"Build containment: seal the work area, start the negative-air machine, and lay out the three-stage decon corridor in order.","check":"Containment sealed; negative air running; corridor in order.","stationId":"hazmat-containment"},{"action":"Work the job wet: keep material wet, hand tools over power tools inside containment, no dry sweeping at any point.","check":"Wet methods used throughout; no visible dust.","stationId":"hazmat-containment"},{"action":"Bag and label the waste, decon out through the corridor in order, and complete the waste manifest at the desk.","check":"Waste bagged and labelled; manifest complete; decon done in order.","stationId":"hazmat-waste"}],"strands":["safety","procedure","materials","documentation"],"tiers":["applied"],"title":"Union trades — laborers: hazmat awareness & abatement support"},
+{"id":"union-trades-operating-engineers","group":"union","audience":"Union trades learners (operating engineers)","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"Union trades operating engineers sequence in the crane and lift simulator: walk the pre-op inspection, read the lift plan against the load chart, set the lift zone with a posted signal person, run the pick on standard hand signals only, then park, shut down, log and debrief. Mirrors the simulator-room training model used at flagship operating-engineer training centres (IUOE ITEC — alignment from the 2026-11-10 industry pass, not a partnership). Simulation only — not a crane operator certification, not a licence, not an apprenticeship credential.","halls":{"mapped_hall":null,"note":"No hall mapped. Hall mapping is open (Phase 4). The 111-hall roster in the SmartCiti.X bundle is an in-repo list; 0 of 111 signed off by a named practitioner — a named hall is not a partner."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Walk a full pre-op inspection and report defects instead of working around them","Check a planned pick against the load chart at the working radius","Set a barricaded lift zone with a posted signal person","Run a pick on standard hand signals — and stop on any unclear signal","Park, shut down, log the lift and debrief"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["OSHA Cranes & Derricks in Construction standard, 29 CFR 1926 Subpart CC (osha.gov/cranes-derricks-construction): inspections, load charts, signal persons, and the stop rule on unclear signals.","OSHA hand signals for crane operations (standard signal chart referenced in 1926.1422).","Industry pass 1 (2026-11-10): IUOE ITEC flagship centre teaches with simulator rooms — alignment reference only."],"stations":[{"id":"oe-inspection","title":"Inspection apron — crane, rigging board, pre-op checklist"},{"id":"oe-cab","title":"Simulator cab — controls, load chart display, lift plan"},{"id":"oe-liftzone","title":"Lift zone — load, tag lines, signal spotter position"}],"steps":[{"action":"Pre-op inspection: walk the checklist — structure, wire rope, hook block, and the rigging gear on the board.","check":"Checklist complete; defects reported, not worked around.","stationId":"oe-inspection"},{"action":"Read the lift plan and the load chart: confirm the load weight, the working radius, and the chart capacity before any pick.","check":"Load within chart capacity at the planned radius.","stationId":"oe-cab"},{"action":"Set up the pick: stabilisers set, lift zone barricaded, signal person posted where the operator can see them.","check":"Zone barricaded; signal person in place.","stationId":"oe-liftzone"},{"action":"Run the pick on standard hand signals only. Any signal you cannot read clearly means stop — every time.","check":"Pick landed on the mark; stop rule honoured.","stationId":"oe-cab"},{"action":"Park and shut down the machine, log the lift, and debrief with the coach.","check":"Machine secured; log complete; debrief done.","stationId":"oe-inspection"}],"strands":["machines","safety","inspection","procedure"],"tiers":["applied"],"title":"Union trades — operating engineers: crane & lift simulator"},
+{"id":"union-trades-carpenters","group":"union","audience":"Union trades learners (carpenters)","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"Union trades carpenters sequence: read the drawing and pull dimensions, lay the wall out on the floor, cut and frame the section square with headers over openings, stand it plumb, level and braced, then inspect against the punch list. Aligned to regional carpenter training programmes (Nor Cal Carpenters Training — alignment from the 2026-11-10 industry pass, not a partnership). Simulation only — not certification, not licensure, not an apprenticeship credential.","halls":{"mapped_hall":null,"note":"No hall mapped. Hall mapping is open (Phase 4). The 111-hall roster in the SmartCiti.X bundle is an in-repo list; 0 of 111 signed off by a named practitioner — a named hall is not a partner."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Pull dimensions from a drawing into a cut list","Lay out a wall section on the floor, plates marked for studs and openings","Frame a section square, with headers over openings","Stand, plumb, level and brace the section","Inspect against a punch list and log what remains"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["OSHA construction standards topic pages (osha.gov/construction): PPE, tool safety, and fall protection awareness for framing work.","OSHA PPE topic page (osha.gov/personal-protective-equipment).","Industry pass 1 (2026-11-10): Nor Cal Carpenters Training runs regional carpenter apprenticeship training — alignment reference only."],"stations":[{"id":"carp-layout","title":"Layout floor — drawings, chalk line, plates"},{"id":"carp-framing","title":"Framing bench — studs, headers, saws"},{"id":"carp-inspect","title":"Inspection point — square, level, punch list"}],"steps":[{"action":"Read the drawing and pull the dimensions for one wall section into a cut list.","check":"Dimensions pulled; cut list complete.","stationId":"carp-layout"},{"action":"Lay the wall out on the floor: snap the lines and mark the plates for studs, jacks and openings.","check":"Layout matches the drawing.","stationId":"carp-layout"},{"action":"Cut and assemble: frame the section square, with headers over every opening.","check":"Section framed; headers in place.","stationId":"carp-framing"},{"action":"Stand the section, then plumb, level and brace it.","check":"Plumb and level within tolerance; braced.","stationId":"carp-framing"},{"action":"Inspect the section against the punch list, log anything left, and debrief with the coach.","check":"Punch list cleared or logged; debrief complete.","stationId":"carp-inspect"}],"strands":["layout","tools","materials","inspection"],"tiers":["applied"],"title":"Union trades — carpenters: layout & wall framing"},
+{"id":"union-trades-laborers","group":"union","audience":"Union trades learners (laborers — site work)","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"Union trades laborers sequence for site preparation and material handling: walk the site plan and confirm utility marks, stage materials with mechanical aids first, rig a load with rated slings and agreed signals, confirm trench protection and access before anyone enters, then housekeeping and close-out. Aligned to laborers' training programmes (Laborers' Training Center of Northern California — alignment from the 2026-11-10 industry pass, not a partnership). Simulation only — not certification, not a competent-person designation, not an apprenticeship credential.","halls":{"mapped_hall":null,"note":"No hall mapped. Hall mapping is open (Phase 4). The 111-hall roster in the SmartCiti.X bundle is an in-repo list; 0 of 111 signed off by a named practitioner — a named hall is not a partner."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Walk a site plan, confirm utility marks, and name the day's hazards","Stage materials with mechanical aids first — no solo heavy lifts","Rig a load with rated slings and agreed signals","Confirm trench protection and access before entry — never enter an unprotected trench","Close out clean: spoil back from the edge, tools in, day logged"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["OSHA trenching and excavation topic page (osha.gov/trenching-excavation): protective systems, access and egress, spoil placement, competent-person inspections.","OSHA materials handling topic page (osha.gov/materials-handling): mechanical aids, rigging and safe lifting practice.","OSHA PPE topic page (osha.gov/personal-protective-equipment)."],"stations":[{"id":"laborers-survey","title":"Site board — site plan, utility marks, hazard survey"},{"id":"laborers-staging","title":"Staging yard — rigging, pallets, mechanical aids"},{"id":"laborers-trench","title":"Trench edge — protective system, access ladder, spoil pile"}],"steps":[{"action":"Walk the site plan: confirm the utility marks and name the day's hazards before any work starts.","check":"Utilities confirmed; hazards named.","stationId":"laborers-survey"},{"action":"Stage the materials: mechanical aids first, team lift for anything hands still have to move.","check":"Materials staged; no solo heavy lifts.","stationId":"laborers-staging"},{"action":"Rig a load for the hoist: pick rated slings, check the tags, and agree the signals with the operator.","check":"Rigging rated and checked; signals agreed.","stationId":"laborers-staging"},{"action":"At the trench edge: confirm the protective system is in place and the access ladder is set before anyone enters. Nobody enters an unprotected trench.","check":"Protection and access confirmed before entry.","stationId":"laborers-trench"},{"action":"Housekeeping and close-out: spoil kept back from the edge, tools put away, and the day logged at the site board.","check":"Area clean; log complete.","stationId":"laborers-survey"}],"strands":["safety","materials","procedure","coordination"],"tiers":["applied"],"title":"Union trades — laborers: site prep & material handling"},
+{"id":"robotics-integration","group":"more","audience":"Learners in robotic + human integration training","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"Robotics training: human-robot integration in a shared cell — safety zone first, controls and hand-guiding, a guided pick-and-place task, a human handover, and a debrief. Grounded in the SmartCiti.X repo's own framing (\"Gamified training to enhance robotic and human integrations\"); the repo describes 11 simulators as part of its bundle — no simulator is named here beyond that repo copy, and no performance figure is claimed. Simulation only — not certification.","halls":{"mapped_hall":null,"note":"No hall mapped. Trade halls in the Holodeck player (per vr-entry README): Ironworkers, Welding Trades, Boilermakers, Millwrights. Hall mapping is open (Phase 4)."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Confirm the cell boundary, the e-stop and your PPE","Set training mode and switch hand-guiding on","Hand-guide the arm through a pick-and-place path","Complete a safe human handover at the handover point","Home the arm, log the run and debrief"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["SmartCiti.X repo description (GitHub, verified 2026-11-07): \"Gamified training to enhance robotic and human integrations\". SmartCiti.X README (read 2026-11-05) describes an 11-simulator bundle — cited as repo copy, not verified live here.","OSHA PPE topic page (osha.gov/personal-protective-equipment): PPE selection, fit, limitations, training."],"stations":[{"id":"robotics-safety-zone","title":"Safety zone — cell boundary, e-stop, PPE"},{"id":"robotics-control-panel","title":"Control panel — mode select, hand-guiding controls"},{"id":"robotics-work-cell","title":"Work cell — robot arm, task bench, handover point"}],"steps":[{"action":"Safety zone: PPE check, confirm the cell boundary and the e-stop.","check":"PPE fits; boundary and e-stop confirmed.","stationId":"robotics-safety-zone"},{"action":"Control panel: select the training mode and confirm hand-guiding is on.","check":"Mode confirmed; hand-guiding on.","stationId":"robotics-control-panel"},{"action":"Guided task: hand-guide the arm through the pick-and-place path.","check":"Path complete without boundary breach.","stationId":"robotics-work-cell"},{"action":"Handover: the robot presents the part; the learner takes it at the handover point.","check":"Handover complete; hands clear of the cell.","stationId":"robotics-work-cell"},{"action":"Return the arm to home, log the run, and debrief with the coach.","check":"Arm homed; run logged; debrief complete.","stationId":"robotics-control-panel"}],"strands":["machines","safety","coordination","procedure"],"tiers":["applied"],"title":"Robotics — human-robot integration in a shared cell"},
+{"id":"k12-arvr-foundations","group":"more","audience":"K-12 learners (AR/VR education)","deep_links":{"tradepath_zone":null,"vr_entry":"../vr-entry/index.html"},"description":"A first AR/VR training lesson for K-12 learners: meet the safety station, learn to measure, identify tools, and follow a procedure in order. Fundamentals tier. Simulation only — not certification and not a school credential.","halls":{"mapped_hall":null,"note":"No hall mapped. Trade halls in the Holodeck player (per vr-entry README): Ironworkers, Welding Trades, Boilermakers, Millwrights. Hall mapping is open (Phase 4)."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Pick the right PPE for a job and check the fit","Measure a length twice and mark it before cutting anything","Name three tools on the wall and say what each one does","Follow a printed procedure in order — no skipped steps","Tidy the bench, return every tool and debrief"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["SmartCiti.X skill registry strand names (pack/registry/skills.json, via vr-entry README): coordination, documentation, inspection, layout, leadership, machines, materials, procedure, safety, tools, troubleshooting.","OSHA PPE topic page (osha.gov/personal-protective-equipment): PPE training points (when necessary, what kind, fit, limitations, care)."],"stations":[{"id":"k12-safety-station","title":"Safety station — PPE, first aid, extinguisher"},{"id":"k12-measure-bench","title":"Measure bench — rulers, squares, marking"},{"id":"k12-tool-wall","title":"Tool wall — labelled hand tools"}],"steps":[{"action":"PPE check: pick the right gear for the job and check the fit.","check":"PPE fits; learner can name when it is necessary.","stationId":"k12-safety-station"},{"action":"Measure a length twice and mark it before cutting anything.","check":"Two matching measurements recorded.","stationId":"k12-measure-bench"},{"action":"Identify three tools on the wall and say what each one does.","check":"Three tools named with their jobs.","stationId":"k12-tool-wall"},{"action":"Follow the printed procedure in order — no skipped steps.","check":"Procedure complete in order.","stationId":"k12-measure-bench"},{"action":"Tidy the bench, return every tool, and debrief with the coach.","check":"Bench tidy; debrief complete.","stationId":"k12-tool-wall"}],"strands":["safety","tools","procedure","materials"],"tiers":["fundamentals"],"title":"K-12 AR/VR foundations — measure, tools, safety"},
+{"id":"dental-screening-outreach","group":"more","audience":"Outreach learners (prevention & school screening)","deep_links":{"tradepath_zone":"outreach-hub","vr_entry":"../vr-entry/index.html"},"description":"Prevention and school screening outreach: PPE and referral path, consent before screening, privacy screens and kit in order, screening steps the same way every time, close and file. Screening is not diagnosis: flag, refer, and record — never diagnose in the field. Demo programme inspired by Unspoken Smiles' public work — not official, not endorsed, not affiliated. Simulation only — not certification and not clinical hours.","halls":{"mapped_hall":null,"note":"No hall mapped. Hall mapping is open (Phase 4)."},"mode":["vr-headset","desktop-webgl","mobile-touch"],"objectives":["Confirm PPE and the referral path before screening starts","Welcome families and confirm consent before any screening","Set privacy screens and lay the kit out in order","Run the screening steps the same way every time — flag and refer, never diagnose","Close the queue, file the forms and debrief"],"sites":{"indiana":"Proposed/planned training site — no site, city, or address named.","louisiana":"Proposed/planned training site — no site, city, or address named."},"sources":["CDC Guidelines for Infection Control in Dental Health-Care Settings 2003 (MMWR 52(RR17)), via UnspokenSmiles-VR wiki research notes: Standard Precautions, one-way instrument flow.","TradeQuest centre JSON — Outreach Hub zone (Prevention & School Screening)."],"stations":[{"id":"outreach-hub-safety","title":"Safety station — PPE, first aid, extinguisher"},{"id":"outreach-hub-checkin","title":"Check-in table — welcome, consent forms, queue"},{"id":"outreach-hub-screening","title":"Screening table — kit case, privacy screens, oversized brush"}],"steps":[{"action":"PPE check + confirm the referral path before screening starts.","check":"PPE fits; referral path known.","stationId":"outreach-hub-safety"},{"action":"Welcome families and confirm consent before any screening.","check":"Consent confirmed for every learner.","stationId":"outreach-hub-checkin"},{"action":"Set the privacy screens, lay the kit out in order.","check":"Screens up; kit in order.","stationId":"outreach-hub-screening"},{"action":"Run the screening steps the same way every time; flag and refer — never diagnose.","check":"Screenings recorded; flags referred.","stationId":"outreach-hub-screening"},{"action":"Close the queue, file the forms, and debrief with the coach.","check":"Forms filed; debrief complete.","stationId":"outreach-hub-checkin"}],"strands":["procedure","safety","documentation","coordination"],"tiers":["applied"],"title":"Outreach — prevention & school screening"}
+];
+
+const $ = (id) => document.getElementById(id);
+const STORE_KEY = "tradequest-modules-v1";
+let store = {};
+try { store = JSON.parse(window.localStorage.getItem(STORE_KEY) || "{}"); } catch (e) { store = {}; }
+let current = null;
+
+function doneSet(id) { return new Set(store[id] || []); }
+function save(id, set) {
+  store[id] = Array.from(set);
+  try { window.localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {}
+}
+function stationTitle(sc, stationId) {
+  const st = sc.stations.find((s) => s.id === stationId);
+  return st ? st.title : stationId;
+}
+const GROUPS = [["start", "Start here — every trade, every time"], ["union", "TradeQuest union modules"], ["more", "More training environments"]];
+
+function renderList() {
+  const wrap = $("scenarioList");
+  wrap.innerHTML = "";
+  let completeCount = 0;
+  for (const [gkey, glabel] of GROUPS) {
+    const mods = MODULES.filter((m) => m.group === gkey);
+    if (!mods.length) continue;
+    const h = document.createElement("h3");
+    h.textContent = glabel;
+    wrap.appendChild(h);
+    for (const sc of mods) {
+      const done = doneSet(sc.id);
+      if (done.size === sc.steps.length) completeCount++;
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "scen";
+      const badge = document.createElement("span");
+      badge.className = "badge" + (done.size === sc.steps.length ? " done" : "");
+      badge.textContent = done.size === 0 ? "Not started" : done.size === sc.steps.length ? "Complete" : done.size + " of " + sc.steps.length + " steps";
+      const t = document.createElement("b");
+      t.textContent = sc.title;
+      const m = document.createElement("span");
+      m.className = "mut";
+      m.textContent = sc.audience + " · " + sc.tiers.join(", ") + " · strands: " + sc.strands.join(", ");
+      b.appendChild(badge);
+      b.appendChild(t);
+      b.appendChild(m);
+      b.addEventListener("click", () => showScenario(sc.id, true));
+      wrap.appendChild(b);
+    }
+  }
+  $("overall").textContent = completeCount + " of " + MODULES.length + " modules complete on this device.";
+}
+
+function renderDetail(sc) {
+  const done = doneSet(sc.id);
+  $("dTitle").textContent = sc.title;
+  $("dDesc").textContent = sc.description;
+  $("dMeta").textContent = sc.audience + " · " + sc.tiers.join(", ") + " · strands: " + sc.strands.join(", ");
+  const objs = $("dObjs");
+  objs.innerHTML = "";
+  for (const o of sc.objectives || []) {
+    const li = document.createElement("li");
+    li.textContent = o;
+    objs.appendChild(li);
+  }
+  const list = $("dSteps");
+  list.innerHTML = "";
+  sc.steps.forEach((step, i) => {
+    const li = document.createElement("li");
+    li.className = "step" + (done.has(i) ? " done" : "");
+    li.tabIndex = 0;
+    li.setAttribute("role", "button");
+    const n = document.createElement("span");
+    n.className = "n";
+    n.textContent = String(i + 1);
+    const head = document.createElement("strong");
+    head.textContent = " " + stationTitle(sc, step.stationId) + " — ";
+    const act = document.createElement("span");
+    act.textContent = step.action + " ";
+    const chk = document.createElement("span");
+    chk.className = "mut";
+    chk.textContent = "Check: " + step.check;
+    li.appendChild(n);
+    li.appendChild(head);
+    li.appendChild(act);
+    li.appendChild(chk);
+    const toggle = () => {
+      const d = doneSet(sc.id);
+      if (d.has(i)) d.delete(i); else d.add(i);
+      save(sc.id, d);
+      renderDetail(sc);
+    };
+    li.addEventListener("click", toggle);
+    li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+    list.appendChild(li);
+  });
+  $("dBar").style.width = Math.round((done.size / sc.steps.length) * 100) + "%";
+  $("dCount").textContent = done.size + " of " + sc.steps.length + " steps complete" +
+    (done.size === sc.steps.length ? " — module complete. Simulation only — not a credential." : "");
+  const links = $("dLinks");
+  links.innerHTML = "";
+  if (sc.deep_links.tradepath_zone) {
+    const a = document.createElement("a");
+    a.className = "bigbtn";
+    a.href = "../holodeck/index.html?zone=" + encodeURIComponent(sc.deep_links.tradepath_zone);
+    a.textContent = "Run the matching zone in the TradeQuest Holodeck";
+    links.appendChild(a);
+    const note = document.createElement("p");
+    note.className = "mut small";
+    note.textContent = "Opens the IWSDK Training Centre bundled with this build at the " +
+      sc.deep_links.tradepath_zone + " zone.";
+    links.appendChild(note);
+  }
+  const v = document.createElement("a");
+  v.className = "bigbtn ghost";
+  v.href = sc.deep_links.vr_entry;
+  v.textContent = "Open the Learner VR Entry & skill graph";
+  links.appendChild(v);
+  const src = $("dSources");
+  src.innerHTML = "";
+  for (const s of sc.sources) {
+    const p = document.createElement("p");
+    p.textContent = s;
+    src.appendChild(p);
+  }
+  const hall = document.createElement("p");
+  hall.className = "mut";
+  hall.textContent = sc.halls.note;
+  src.appendChild(hall);
+  const sites = document.createElement("p");
+  sites.className = "mut";
+  sites.textContent = "Training sites — Louisiana: " + sc.sites.louisiana + " Indiana: " + sc.sites.indiana;
+  src.appendChild(sites);
+}
+
+function showScenario(id, push) {
+  const sc = MODULES.find((s) => s.id === id);
+  if (!sc) return;
+  current = sc;
+  $("list").hidden = true;
+  $("detail").hidden = false;
+  renderDetail(sc);
+  if (push) {
+    const u = new URL(window.location.href);
+    u.searchParams.set("scenario", id);
+    window.history.replaceState(null, "", u.toString());
+  }
+  window.scrollTo(0, 0);
+}
+
+$("backBtn").addEventListener("click", () => {
+  $("detail").hidden = true;
+  $("list").hidden = false;
+  renderList();
+  const u = new URL(window.location.href);
+  u.searchParams.delete("scenario");
+  window.history.replaceState(null, "", u.toString());
+});
+$("resetBtn").addEventListener("click", () => {
+  if (!current) return;
+  save(current.id, new Set());
+  renderDetail(current);
+});
+
+renderList();
+const initial = new URLSearchParams(window.location.search).get("scenario");
+if (initial) showScenario(initial, false);
+</script>
+</body>
+</html>
