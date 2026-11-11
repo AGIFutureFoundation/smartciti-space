@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guide — SmartCiti.X TradeQuest (agent-first walkthrough)</title>
+<meta name="description" content="Agent-first guide to the SmartCiti.X / TradeQuest demo build: what it is, its exact status, the machine-readable doors, and the five-step walkthrough.">
+<link rel="canonical" href="https://smartciti.space/guide.html">
+<link rel="icon" type="image/png" href="assets/profile.png">
+<style>
+:root{--bg:#0b1220;--panel:#131e33;--ink:#e8eefc;--mut:#9fb0d0;--acc:#ffb020;--line:#26344f;--brand:#ff6b1a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:940px;margin:0 auto;padding:0 16px 56px}
+a{color:#7cc4ff}
+h1{font-size:1.9rem;margin:.6rem 0 .2rem}
+h1 .x{color:var(--brand)}
+h2{font-size:1.25rem;margin:1.4rem 0 .4rem}
+p{margin:.45rem 0}
+.banner{border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;font-size:.95rem}
+.banner.demo{background:#3a2f00;border:1px solid #8a6d00;color:#ffe9a8}
+.banner.proposed{background:#2a1414;border:1px solid #7a2b2b;color:#ffc9c9}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin:1rem 0}
+.mut{color:var(--mut);font-size:.93rem}
+code{background:#0d1730;border:1px solid var(--line);border-radius:6px;padding:.05rem .35rem;font-size:.9em}
+ol li,ul li{margin:.3rem 0}
+footer{color:var(--mut);font-size:.88rem;margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem}
+.agi-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;padding:0;list-style:none}
+.agi-chips a{display:inline-block;padding:.45rem .8rem;border:1px solid var(--acc);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Guide — SmartCiti<span class="x">.X</span> / TradeQuest</h1>
+<p>An agent-first walkthrough of this site: what it is, exactly what state it is
+in, where the machine-readable doors are, and the five steps a human takes
+through it. <a href="guide.es.html">Guía en español (traducción en curso)</a>.</p>
+
+<div class="banner demo"><strong>Demo mode — sample data, not real learners.</strong>
+Simulation only — NOT certification, licensure, or an apprenticeship credential.</div>
+<div class="banner proposed"><strong>Status, plainly:</strong> SmartCiti.X is proposed,
+not incorporated / funded / offered. It appears as Series 10 in the W3 internal
+series list — an internal planning document, not a legal filing.
+<strong>No worlds are live in RP1 yet.</strong></div>
+
+<section class="card">
+<h2>For agents — read this first</h2>
+<p>You are welcome here. This is a static demo build of a learner platform:
+a job-posting → skill-graph learner app (TradeQuest), ten modular union
+training environments, a cohort dashboard demo fed by a bundled sample log,
+a VR entry, and a bundled IWSDK Holodeck scene. Everything a learner does
+here is simulated, and every figure traces to the bundled sample data —
+there are no real learners behind this site.</p>
+<p><strong>Machine-readable doors (all on this site):</strong></p>
+<ul>
+<li><code>/modules/modules.json</code> — the module index (all ten training environments).</li>
+<li><code>/modules/*.json</code> — one file per module: objectives, stations, steps, checks.</li>
+<li><code>/learner-progress-contract.json</code> — the LearnerProgressEvent contract the dashboard reads.</li>
+<li><code>/sample-log.json</code> — the twenty anonymised sample events behind the dashboard demo.</li>
+<li><code>/sitemap.xml</code> and <code>/robots.txt</code> — the route map and crawl posture.</li>
+</ul>
+<p><strong>MCP:</strong> no MCP endpoint yet — the JSON files above are the
+agent interface today. <strong>Contact:</strong> this site carries no working
+email door; the one verified public channel is the Facebook Page linked in
+the footer. Please crawl politely, quote with attribution to SmartCiti.X,
+and never present this demo as a live, enrolling, or credentialed program.</p>
+</section>
+
+<section class="card">
+<h2>The five-step walkthrough (humans)</h2>
+<ol>
+<li><strong>Start at the hub</strong> (<a href="index.html">home</a>) — read the two
+status banners first; they are the truth about what this build is.</li>
+<li><strong>Paste a job posting</strong> in the
+<a href="learner/index.html">TradeQuest learner app</a> — trades, dental, or
+nonprofit — and get a sequenced skill graph with your next three skills and
+the Scout / Mapper / Coach agent flow.</li>
+<li><strong>Run a module</strong> from the
+<a href="modules/index.html">module catalog</a> — Safety Procedures first,
+then electrical, HVAC, hazmat &amp; abatement, operating engineers,
+carpenters, laborers, robotics, K-12 AR/VR foundations, or dental screening
+outreach. Progress saves on your device only.</li>
+<li><strong>See the cohort view</strong> on the
+<a href="dashboard-v2-demo.html">dashboard demo</a> — strand, tier, and source
+filters over the sample log. Demo figures, by design.</li>
+<li><strong>Step into the worlds</strong> — the
+<a href="vr-entry/index.html">VR entry</a> and the bundled
+<a href="holodeck/index.html">Holodeck (IWSDK Training Centre)</a>: ten
+procedural 3D zones on a shared shell. The Holodeck fabric host that feeds
+the RP1 pipeline is live; the in-RP1 attach completes once the public map
+service deploys. No worlds are live in RP1 yet.</li>
+</ol>
+</section>
+
+<section class="card">
+<h2>The story so far</h2>
+<p>The site teaches the way the comic does — through pictures. <em>Smart Citi
+Issue #1 — First Day in the Holodeck</em> follows a coach and a young learner
+through the teal city, through the Holodeck door at anchor 39.846, −86.622.
+The art lives on the hub and in the project repository's README.</p>
+</section>
+
+<footer>
+  <ul class="agi-chips" aria-label="Follow us">
+    <li><a href="https://www.facebook.com/profile.php?id=61596590964426" rel="noopener" target="_blank">Facebook — SmartCiti.X</a></li>
+  </ul>
+  <p>Guide v1, 2026-11-10. Naming: TradeQuest is the current name (renamed
+  from TradePath, 2026-11-10) — same program. SmartCiti.X naming is unchanged.</p>
+</footer>
+</main>
+</body>
+</html>
