@@ -48,15 +48,75 @@ footer{color:var(--mut);font-size:.88rem;margin-top:2rem;border-top:1px solid va
 .agi-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;padding:0;list-style:none}
 .agi-chips a{display:inline-block;padding:.45rem .8rem;border:1px solid var(--acc);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem}
 .agi-fb-slot{min-height:500px}
+.site-head{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;padding:.9rem 0 .4rem}
+.site-head .brand{font-weight:800;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.site-head .brand .x{color:var(--brand)}
+.site-nav{display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin-left:auto}
+.site-nav a{color:var(--mut);text-decoration:none;font-size:.93rem;font-weight:600}
+.site-nav a:hover{color:var(--ink);text-decoration:underline}
+.hero{padding:.6rem 0 .2rem}
+.hero h1{font-size:2.35rem;line-height:1.15;margin:.4rem 0 .5rem}
+.hero .lede{font-size:1.12rem}
+.hero-figs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:1rem 0}
+@media(max-width:640px){.hero-figs{grid-template-columns:1fr}}
+.hero-figs figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.hero-figs img{display:block;width:100%;height:220px;object-fit:cover}
+.hero-figs figcaption{padding:.55rem .8rem;color:var(--mut);font-size:.88rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:.9rem 0 .2rem}
+.cta-row a.btn{display:inline-block;background:var(--acc);color:#1a1200;font-weight:800;border-radius:10px;padding:.65rem 1.05rem;text-decoration:none}
+.cta-row a.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line);font-weight:600}
+.btn.disabled{opacity:.55;cursor:default}
+figure.page-fig{margin:1rem 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+figure.page-fig img{display:block;width:100%;max-height:340px;object-fit:cover}
+figure.page-fig figcaption{padding:.55rem .8rem;color:var(--mut);font-size:.88rem}
 </style>
 </head>
 <body>
 <main>
-<h1>SmartCiti<span class="x">.X</span> — TradeQuest Learner Platform</h1>
-<p class="lede">One consolidated build of the SmartCiti.X learner platform and the
-TradeQuest union training environments. Paste a job posting and get your next
-three skills, work a trade module station by station, then step into the
-Holodeck — all of it simulated, all of it honest about what it is.</p>
+<header class="site-head">
+  <a class="brand" href="index.html">SmartCiti<span class="x">.X</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="guide.html">Guide</a>
+    <a href="learner/index.html">Learner app</a>
+    <a href="modules/index.html">Modules</a>
+    <a href="holodeck/index.html">Holodeck</a>
+    <a href="vr-entry/index.html">VR entry</a>
+    <a href="/library/">Library</a>
+    <a href="/store/">Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+<h1>SmartCiti<span class="x">.X</span> — Learn the city by playing it, building it, and walking its worlds</h1>
+<p class="lede">SmartCiti.X is W3 LLC Series 10 — listed as S10 SmartCiti.X in the
+W3 LLC internal series list (April 2026). It is the home of the WorldForge worlds
+project — 41 worlds in the public WorldForge-Browser build — and of the Smart Citi
+game: 939 Master Cards across 41 worlds, with all 41 quest worlds verified
+winnable in the local build. The game is not minted and not for sale. Start with
+the worlds, play the game, then train in TradeQuest: paste a job posting and get
+your next three skills, work a trade module station by station, and step into the
+Holodeck.</p>
+<div class="cta-row">
+  <a class="btn" href="https://agifuturefoundation.github.io/WorldForge-Browser/earth/">Explore the worlds</a>
+  <a class="btn ghost" href="#game">Play the Smart Citi game</a>
+  <a class="btn ghost" href="guide.html">Read the guide</a>
+</div>
+<div class="hero-figs">
+  <figure>
+    <img src="assets/smartciti-x-avatar.png" alt="SmartCiti.X avatar artwork — the teal city mark">
+    <figcaption>SmartCiti.X — W3 LLC Series 10 in the internal series list.</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/worldforge-avatar.png" alt="WorldForge avatar artwork">
+    <figcaption>WorldForge — 41 worlds in the public browser build.</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/comic-issue-01-cover.webp" alt="Smart Citi Issue #1 comic cover — First Day in the Holodeck">
+    <figcaption><em>Smart Citi Issue #1 — First Day in the Holodeck.</em> The site teaches the way the comic does: through pictures.</figcaption>
+  </figure>
+</div>
+</section>
 
 <div class="banner demo"><strong>Demo mode — sample data, not real learners.</strong>
 Simulation only — NOT certification, licensure, or an apprenticeship credential.</div>
@@ -114,6 +174,74 @@ claimed anywhere in this build.</div>
     <a class="btn ghost" href="https://rp1-worlds-production.up.railway.app/holodeck.json">Holodeck fabric (live host)</a>
   </section>
 </div>
+
+<!-- ============================================================
+     SMART CITI GAME — live section (site upgrade 2026-11)
+     The playable build lives in this site at game/index.html,
+     with its card data at game/data/cards.enriched.json.
+     ============================================================ -->
+<section class="card" id="game">
+  <h2>Play the game — Smart Citi</h2>
+  <p>The Smart Citi game turns the 41 WorldForge worlds into a card quest:
+  <strong>939 Master Cards across 41 worlds</strong>, built from the WorldForge
+  cards. All 41 quest worlds were verified winnable in the local build
+  (V1.1, verified locally).</p>
+  <p><strong>The game is not minted and not for sale.</strong> That line stays
+  true wherever the game is mentioned.</p>
+  <p class="mut">Rarity on the cards (Mythic, Legendary, Epic, Rare, Uncommon,
+  Common) is designed rarity set at design time — it is labelled as designed,
+  not drawn from play or sales data.</p>
+  <a class="btn" href="game/index.html">Play the Smart Citi game</a>
+</section>
+
+<section class="card">
+  <h2>Step inside — Holodeck, VR entry, and WorldForge</h2>
+  <p>No SmartCiti.X film is embedded on this page. The way in is the site's own
+  media surfaces: the bundled Holodeck scene, the learner VR entry, and the
+  WorldForge VR entry at www.agi.lease.</p>
+  <p>
+    <a class="btn ghost" href="holodeck/index.html">Open the Holodeck (IWSDK)</a>
+    <a class="btn ghost" href="vr-entry/index.html">Open the VR entry</a>
+    <a class="btn ghost" href="https://www.agi.lease/">WorldForge VR entry — www.agi.lease</a>
+  </p>
+  <p class="mut">RP1 status, stated wherever RP1 is mentioned: RP1 CompanyId 130
+  is confirmed; the public fabric URL waits on a VPS deploy.
+  <strong>No worlds are live in RP1 yet.</strong></p>
+</section>
+
+<!-- ============================================================
+     STAGING SLOT — LIBRARY (BLUEPRINT §3, SmartCiti.X row)
+     Target page /library/ is NOT built in this upgrade.
+     Contents when built: B2 The TradeQuest Handbook, TradeQuest
+     materials, and the SmartCiti film and world archive.
+     This slot is a nav + section placeholder only.
+     ============================================================ -->
+<section class="card" id="library-slot">
+  <h2>Library — coming as a staged page</h2>
+  <p>The SmartCiti.X reading room will collect <em>B2 The TradeQuest
+  Handbook</em>, the TradeQuest materials, and the SmartCiti film and world
+  archive. Every book in this programme is manuscript-complete — not
+  published — and the library page will say so plainly.</p>
+  <p><a href="/library/">Library — /library/ (staging slot, page not yet built)</a></p>
+</section>
+
+<!-- ============================================================
+     STAGING SLOT — STORE (BLUEPRINT §3, SmartCiti.X row)
+     Target page /store/ is NOT built in this upgrade.
+     Contents when built: B2 (print + ebook), the TradeQuest sim
+     cohort waitlist, and SmartCiti.X swag. WAITLIST MODE ONLY:
+     no checkout, no cart that takes payment, no PayPal links.
+     ============================================================ -->
+<section class="card" id="store-slot">
+  <h2>Store — waitlist mode</h2>
+  <p>The SmartCiti.X store will list <em>B2 The TradeQuest Handbook</em>
+  (print + ebook), TradeQuest sim cohort seats, and SmartCiti.X swag —
+  as a catalogue with waitlist capture only.</p>
+  <p class="mut">Enrollment opens when checkout is live. Joining the waitlist
+  costs nothing and holds your place in line — it is not a purchase, and no
+  payment will be taken until the enrollment page says so in plain words.</p>
+  <p><a href="/store/">Store — /store/ (staging slot, page not yet built)</a></p>
+</section>
 
 <section class="card">
   <h2>The skill graph — eleven strands</h2>
@@ -176,6 +304,13 @@ claimed anywhere in this build.</div>
   build (hub + TradeQuest learner section + Holodeck), assembled from the
   polished consolidation. Deployment happens only on approval of this exact
   version.</p>
+  <p><strong>Site:</strong> <a href="index.html">Home</a> ·
+  <a href="guide.html">Guide</a> · <a href="learner/index.html">Learner app</a> ·
+  <a href="modules/index.html">Modules</a> · <a href="holodeck/index.html">Holodeck</a> ·
+  <a href="vr-entry/index.html">VR entry</a> · <a href="/library/">Library</a> ·
+  <a href="/store/">Store</a></p>
+  <p>SmartCiti.X is one of the corporate holdings in the agentic network.
+  Site upgrade staged 2026-11-11 — staged locally, not pushed or deployed.</p>
 </footer>
 </main>
 <div id="fb-root"></div>

@@ -27,14 +27,51 @@ ol li,ul li{margin:.3rem 0}
 footer{color:var(--mut);font-size:.88rem;margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem}
 .agi-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;padding:0;list-style:none}
 .agi-chips a{display:inline-block;padding:.45rem .8rem;border:1px solid var(--acc);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem}
+.site-head{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;padding:.9rem 0 .4rem}
+.site-head .brand{font-weight:800;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.site-head .brand .x{color:var(--brand)}
+.site-nav{display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin-left:auto}
+.site-nav a{color:var(--mut);text-decoration:none;font-size:.93rem;font-weight:600}
+.site-nav a:hover{color:var(--ink);text-decoration:underline}
+.lede{font-size:1.08rem;max-width:46rem}
+figure.page-fig{margin:1rem 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+figure.page-fig img{display:block;width:100%;max-height:340px;object-fit:cover}
+figure.page-fig figcaption{padding:.55rem .8rem;color:var(--mut);font-size:.88rem}
 </style>
 </head>
 <body>
 <main>
+<header class="site-head">
+  <a class="brand" href="index.html">SmartCiti<span class="x">.X</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="guide.html">Guide</a>
+    <a href="learner/index.html">Learner app</a>
+    <a href="modules/index.html">Modules</a>
+    <a href="holodeck/index.html">Holodeck</a>
+    <a href="vr-entry/index.html">VR entry</a>
+    <a href="/library/">Library</a>
+    <a href="/store/">Store</a>
+  </nav>
+</header>
+
 <h1>Guide — SmartCiti<span class="x">.X</span> / TradeQuest</h1>
+<p class="lede">SmartCiti.X is W3 LLC Series 10 — listed as S10 SmartCiti.X in the
+W3 LLC internal series list (April 2026) — and the home of two builds this guide
+walks through: the WorldForge worlds project (41 worlds in the public
+WorldForge-Browser build) with its TradeQuest learner platform, and the Smart
+Citi game (939 Master Cards across 41 worlds; all 41 quest worlds verified
+winnable in the local build; the game is not minted and not for sale).
+RP1 CompanyId 130 is confirmed and the public fabric URL waits on a VPS deploy —
+<strong>no worlds are live in RP1 yet.</strong></p>
 <p>An agent-first walkthrough of this site: what it is, exactly what state it is
 in, where the machine-readable doors are, and the five steps a human takes
 through it. <a href="guide.es.html">Guía en español (traducción en curso)</a>.</p>
+
+<figure class="page-fig">
+  <img src="assets/comic-issue-01-cover.webp" alt="Smart Citi Issue #1 comic cover — First Day in the Holodeck">
+  <figcaption><em>Smart Citi Issue #1 — First Day in the Holodeck.</em> Start on the hub, then follow the five steps below.</figcaption>
+</figure>
 
 <div class="banner demo"><strong>Demo mode — sample data, not real learners.</strong>
 Simulation only — NOT certification, licensure, or an apprenticeship credential.</div>
@@ -92,6 +129,57 @@ service deploys. No worlds are live in RP1 yet.</li>
 </ol>
 </section>
 
+<!-- ============================================================
+     GAME PAGE — live (site upgrade 2026-11)
+     The playable build lives in this site at game/index.html,
+     with its card data at game/data/cards.enriched.json.
+     ============================================================ -->
+<section class="card">
+<h2>The Smart Citi game</h2>
+<p>The Smart Citi game is the card-quest face of the same 41 worlds: 939 Master
+Cards across 41 worlds, all 41 quest worlds verified winnable in the local
+build. <strong>The game is not minted and not for sale.</strong> Play it here:
+<a href="game/index.html">Play the Smart Citi game</a> (also linked from the
+hub's game section, <a href="index.html#game">Home → Play the game</a>).
+To step inside the worlds
+today, use the site's own media surfaces: the
+<a href="holodeck/index.html">Holodeck</a>, the
+<a href="vr-entry/index.html">VR entry</a>, and the WorldForge VR entry at
+<a href="https://www.agi.lease/">www.agi.lease</a>. No SmartCiti.X film is
+embedded on this site. No worlds are live in RP1 yet.</p>
+</section>
+
+<!-- ============================================================
+     STAGING SLOT — LIBRARY (BLUEPRINT §3, SmartCiti.X row)
+     /library/ is NOT built in this upgrade. Contents when
+     built: B2 The TradeQuest Handbook, TradeQuest materials,
+     SmartCiti film and world archive.
+     ============================================================ -->
+<section class="card">
+<h2>Library — staging slot</h2>
+<p>The reading room at <a href="/library/">/library/</a> will hold B2
+<em>The TradeQuest Handbook</em>, the TradeQuest materials, and the SmartCiti
+film and world archive. Every book in this programme is manuscript-complete —
+not published. The page itself is not built yet; this is a slot only.</p>
+</section>
+
+<!-- ============================================================
+     STAGING SLOT — STORE (BLUEPRINT §3, SmartCiti.X row)
+     /store/ is NOT built in this upgrade. Contents when built:
+     B2 (print + ebook), TradeQuest sim cohort waitlist, and
+     SmartCiti.X swag. WAITLIST MODE ONLY — no checkout and
+     no PayPal links anywhere in a store.
+     ============================================================ -->
+<section class="card">
+<h2>Store — staging slot, waitlist mode</h2>
+<p>The catalogue at <a href="/store/">/store/</a> will list B2 (print +
+ebook), TradeQuest sim cohort seats, and SmartCiti.X swag. Enrollment opens
+when checkout is live. Joining the waitlist costs nothing and holds your place
+in line — it is not a purchase, and no payment will be taken until the
+enrollment page says so in plain words. The page itself is not built yet;
+this is a slot only.</p>
+</section>
+
 <section class="card">
 <h2>The story so far</h2>
 <p>The site teaches the way the comic does — through pictures. <em>Smart Citi
@@ -106,6 +194,13 @@ The art lives on the hub and in the project repository's README.</p>
   </ul>
   <p>Guide v1, 2026-11-10. Naming: TradeQuest is the current name (renamed
   from TradePath, 2026-11-10) — same program. SmartCiti.X naming is unchanged.</p>
+  <p><strong>Site:</strong> <a href="index.html">Home</a> ·
+  <a href="guide.html">Guide</a> · <a href="learner/index.html">Learner app</a> ·
+  <a href="modules/index.html">Modules</a> · <a href="holodeck/index.html">Holodeck</a> ·
+  <a href="vr-entry/index.html">VR entry</a> · <a href="/library/">Library</a> ·
+  <a href="/store/">Store</a></p>
+  <p>SmartCiti.X is one of the corporate holdings in the agentic network.
+  Guide upgrade staged 2026-11-11 — staged locally, not pushed or deployed.</p>
 </footer>
 </main>
 </body>

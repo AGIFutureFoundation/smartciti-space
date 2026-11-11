@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Citi — The Master Card Game</title>
+<meta name="description" content="The Smart Citi game: 939 Master Cards across 41 worlds. Play the card quest built from the WorldForge worlds. The game is not minted and not for sale.">
+<style>
+:root{--bg:#0b0e1a;--panel:#141830;--panel2:#1b2044;--ink:#eef0ff;--muted:#9aa3d0;--gold:#ffd76a;--line:#2c3260}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 600px at 50% -10%,#232a5e,var(--bg));color:var(--ink);font-family:system-ui,Segoe UI,Roboto,sans-serif}
+header{padding:22px 18px 8px;text-align:center}h1{margin:0;font-size:42px;letter-spacing:.06em;background:linear-gradient(90deg,#7df9ff,#ffd76a,#ff8ad8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);max-width:820px;margin:8px auto}
+.statusline{background:#3a1420;border:1px solid #a33;color:#ffd7de;border-radius:10px;padding:8px 14px;max-width:820px;margin:10px auto;font-size:14px}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px}
+nav button,.btn{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:9px 18px;cursor:pointer;font-size:15px}
+nav button.on,.btn:hover{border-color:var(--gold);color:var(--gold)}
+main{max-width:1180px;margin:0 auto;padding:10px 16px 60px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.controls input,.controls select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{border-radius:14px;padding:3px;cursor:pointer;position:relative;background:linear-gradient(160deg,hsl(var(--h),70%,45%),hsl(calc(var(--h) + 60),70%,25%))}
+.card .in{background:#12142b;border-radius:11px;padding:12px;min-height:230px;display:flex;flex-direction:column;gap:6px}
+.card .ic{font-size:38px;text-align:center}.card h4{margin:2px 0;font-size:15px;text-align:center}
+.card .meta{text-align:center;color:var(--muted);font-size:12px}.card .desc{font-size:12px;color:#c9cdf2;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.card .stats{margin-top:auto;display:flex;justify-content:space-between;font-size:12px;color:var(--gold)}
+.r-Common{--rf:#8a90b8}.r-Uncommon{--rf:#3ecf6e}.r-Rare{--rf:#3e9bff}.r-Epic{--rf:#b45cff}.r-Legendary{--rf:#ff9d2e}.r-Mythic{--rf:#ffd76a}
+.card{border:3px solid var(--rf,#888)}
+.card[data-r="Legendary"] .in,.card[data-r="Mythic"] .in{background:linear-gradient(170deg,#1d2148,#12142b 60%);box-shadow:inset 0 0 24px rgba(255,215,106,.25)}
+.rbadge{align-self:center;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--rf);text-transform:uppercase}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.modal{position:fixed;inset:0;background:rgba(3,4,12,.8);display:none;align-items:center;justify-content:center;z-index:9}
+.modal.open{display:flex}.modal .box{background:var(--panel2);max-width:560px;width:92%;max-height:88vh;overflow:auto;border-radius:16px;padding:22px}
+.kv{font-size:13px;color:var(--muted);word-break:break-word}.big{font-size:15px;line-height:1.5}
+.hand{display:flex;gap:10px;flex-wrap:wrap}.hand .card{width:170px}
+.log{background:#0a0c1c;border:1px solid var(--line);border-radius:10px;padding:12px;min-height:90px;font-size:14px;white-space:pre-wrap}
+.pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:2px;font-size:12px}
+.win{color:#3ecf6e;font-weight:700}.lose{color:#ff6b81;font-weight:700}
+.ladder{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
+</style></head><body>
+<header><h1>✨ SMART CITI</h1>
+<p class="sub">A collectible card game built from the real SmartCiti.X / WorldForge Master Cards — 939 cards, 41 worlds. Agents operate; people govern.</p>
+<div class="statusline">⚖️ TRUE STATUS: These are game cards only — nothing is minted, deployed, or offered for sale. No chain, no contract, no price. Rarity &amp; stats are new game design (see review/RARITY-DESIGN.md), not source data.</div>
+<nav>
+<button data-v="collection" class="on">🗂️ Collection</button>
+<button data-v="packs">🎁 Packs &amp; Deck</button>
+<button data-v="quest">🗺️ Quests</button>
+<button data-v="campaign">🏆 Campaign</button>
+</nav><div id="counts" class="sub"></div></header>
+<main>
+<section id="v-collection">
+<div class="controls"><input id="q" placeholder="Search name / description…" size="26">
+<select id="fWorld"><option value="">All worlds</option></select>
+<select id="fKind"><option value="">All kinds</option></select>
+<select id="fRarity"><option value="">All rarities</option></select>
+<span id="shown" class="pill"></span></div>
+<div class="grid" id="grid"></div>
+<button class="btn" id="more">Show more</button></section>
+
+<section id="v-packs" hidden><div class="panel">
+<h2>🎁 Packs &amp; Starter Deck</h2>
+<p>First visit grants a free <b>Starter Deck</b> (30 cards). Open packs (5 cards) any time — this is a local game, packs are free and unlimited. Your collection lives only in this browser (localStorage).</p>
+<p>Owned: <b id="ownedCount">0</b> unique cards · Deck: <b id="deckCount">0</b>/20</p>
+<button class="btn" id="openPack">Open a pack (5 cards)</button>
+<button class="btn" id="autoDeck">Auto-build deck</button>
+<button class="btn" id="clearDeck">Clear deck</button>
+<div class="hand" id="packOut" style="margin-top:14px"></div>
+<h3>Deck rules</h3><p class="kv">Exactly 20 cards · max 1 Mythic · max 3 Legendary · max 4 of any one kind · must include at least 1 Council and 2 Seat cards (you cannot enact a mission without a quorum). Click a card in the Collection to add/remove it from your deck.</p>
+<div id="deckMsg" class="pill"></div><div class="hand" id="deckView"></div></div></section>
+
+<section id="v-quest" hidden><div class="panel">
+<h2>🗺️ District Quest — Build the Citi</h2>
+<p>Pick a world. You are dealt that world's real cards. <b>Operate:</b> play 1 Zone + any 2 Agents/Advisors. <b>Govern:</b> then enact the mission by playing its Council card + at least <b>2 of its 3 Seat cards</b> (Steward Council 2-of-3 quorum — human-reserved actions can never be played by agents alone). Finish before turns run out. Score = total Power of cards played.</p>
+<select id="qWorld"></select> <button class="btn" id="startQuest">Start quest</button>
+<span class="pill" id="qInfo">No quest running</span>
+<h3>Your hand — click to play</h3><div class="hand" id="qHand"></div>
+<h3>Played</h3><div class="hand" id="qPlayed"></div>
+<div class="log" id="qLog">The Holodeck is your home district. Choose a world to begin.</div>
+</div></section>
+
+<section id="v-campaign" hidden><div class="panel">
+<h2>🏆 Campaign — SmartCiti.X Strands × Tiers</h2>
+<p class="kv">Campaign scaffold from SmartCiti.X's learner structure (strands × tiers: Fundamentals → Applied → Mastery), with the Holodeck as home district. Win quests to climb: each tier you clear raises your rank; higher tiers give you fewer turns. Quest wins are saved locally.</p>
+<div class="ladder" id="ladder"></div><p id="rankLine"></p></div></section>
+</main>
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+<footer>Smart Citi v1.1 · Local build only · Data: game/data/cards.enriched.json (939 cards, 939 unique descriptions — v1.1 description-coverage fixes) · Source schema smartcitix-master-cards/0.1</footer>
+<script>
+const $=s=>document.querySelector(s); let CARDS=[],byId={},shown=120;
+const owned=new Set(JSON.parse(localStorage.getItem('sc-owned')||'[]'));
+let deck=JSON.parse(localStorage.getItem('sc-deck')||'[]');
+let wins=JSON.parse(localStorage.getItem('sc-wins')||'[]');
+const save=()=>{localStorage.setItem('sc-owned',JSON.stringify([...owned]));localStorage.setItem('sc-deck',JSON.stringify(deck));localStorage.setItem('sc-wins',JSON.stringify(wins));};
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function cardEl(c,onclick){const d=document.createElement('div');d.className='card r-'+c.rarity;d.dataset.r=c.rarity;d.style.setProperty('--h',hue(c.world));
+d.innerHTML=`<div class="in"><div class="ic">${c.icon}</div><span class="rbadge">${c.rarity} · ${c.kind}</span><h4>${esc(c.name)}</h4><div class="meta">${esc(c.worldName)}</div><div class="desc">${esc(c.description)}</div><div class="stats"><span>⚡ ${c.stats.power}</span><span>🔨 ${c.stats.build}</span><span>Cost ${c.stats.cost}</span></div></div>`;
+d.onclick=()=>onclick?onclick(c):detail(c);return d}
+function detail(c){$('#modalBox').innerHTML=`<h3>${c.icon} ${esc(c.name)}</h3><p class="pill">${c.rarity} (game-designed) · ${c.kind} · ${esc(c.worldName)}</p>
+<p class="big">${esc(c.description)}</p><p class="kv"><b>Source cardId:</b> ${esc(c.cardId)}<br><b>Parent:</b> ${esc(c.parentCardId)}<br><b>Owner:</b> ${esc(c.owner)} · ${esc(c.umbrella)}<br>
+<b>Stats (game-designed):</b> Power ${c.stats.power} · Build ${c.stats.build} · Cost ${c.stats.cost}<br>
+<b>Permissions:</b> ${Object.entries(c.permissions).map(([k,v])=>k+': '+(v||[]).join(', ')).join(' · ')}<br>
+<b>Reserved for humans (Steward Council 2-of-3):</b> ${(c.reservedForHumans||[]).join(', ')}<br>
+<b>Description built from source fields:</b> ${(c.descriptionSourceFields||[]).join(', ')}</p>
+<button class="btn" onclick="toggleDeck('${c.cardId.replace(/'/g,"")}')">${deck.includes(c.cardId)?'Remove from deck':'Add to deck'}</button>
+<button class="btn" onclick="document.querySelector('#modal').classList.remove('open')">Close</button>`;$('#modal').classList.add('open')}
+window.toggleDeck=id=>{deck=deck.includes(id)?deck.filter(x=>x!==id):(validateAdd(id),deck);save();renderDeck();detail(byId[id])};
+function validateAdd(id){const c=byId[id];const cnt=k=>deck.filter(x=>byId[x].kind===k).length;
+if(deck.length>=20)return alert('Deck is full (20).');if(c.rarity==='Mythic'&&deck.some(x=>byId[x].rarity==='Mythic'))return alert('Max 1 Mythic per deck.');
+if(c.rarity==='Legendary'&&deck.filter(x=>byId[x].rarity==='Legendary').length>=3)return alert('Max 3 Legendary per deck.');
+if(cnt(c.kind)>=4)return alert('Max 4 of any one kind.');deck.push(id)}
+function filtered(){const q=$('#q').value.toLowerCase(),w=$('#fWorld').value,k=$('#fKind').value,r=$('#fRarity').value;
+return CARDS.filter(c=>(!w||c.world===w)&&(!k||c.kind===k)&&(!r||c.rarity===r)&&(!q||(c.name+' '+c.description+' '+c.cardId).toLowerCase().includes(q)))}
+function renderGrid(){const f=filtered();$('#shown').textContent=f.length+' cards';const g=$('#grid');g.innerHTML='';
+f.slice(0,shown).forEach(c=>g.appendChild(cardEl(c)));$('#more').style.display=f.length>shown?'':'none'}
+function renderDeck(){$('#ownedCount').textContent=owned.size;$('#deckCount').textContent=deck.length;
+const dv=$('#deckView');dv.innerHTML='';deck.forEach(id=>byId[id]&&dv.appendChild(cardEl(byId[id],c=>{deck=deck.filter(x=>x!==c.cardId);save();renderDeck()})));
+const kinds=new Set(deck.map(id=>byId[id]?.kind));const ok=deck.length===20&&kinds.has('council')&&deck.filter(id=>byId[id]?.kind==='seat').length>=2;
+$('#deckMsg').textContent=ok?'✅ Legal deck — ready for quests.':'Deck not legal yet: needs exactly 20 cards incl. ≥1 Council and ≥2 Seats.'}
+let Q=null;
+function startQuest(){const w=$('#qWorld').value,tier=Math.min(2,Math.floor(wins.length/3));
+const pool=CARDS.filter(c=>c.world===w);Q={world:w,turns:10-tier*2,played:[],done:false};
+Q.hand=[...pool.filter(c=>['zone'].includes(c.kind)).slice(0,2),...pool.filter(c=>['agent','advisor'].includes(c.kind)).slice(0,4),
+...pool.filter(c=>c.kind==='council'),...pool.filter(c=>c.kind==='seat'),...pool.filter(c=>['plaza','coordinator','gate','omega'].includes(c.kind)).slice(0,3)];
+Q.hand.forEach(c=>owned.add(c.cardId));save();renderQuest();
+log(`Quest started in ${pool[0].worldName} (Tier ${['Fundamentals','Applied','Mastery'][tier]}). Turns: ${Q.turns}. Operate first: 1 Zone + 2 Agents/Advisors. Then Govern: Council + 2 Seats.`)}
+function log(m){$('#qLog').textContent=m}
+function renderQuest(){const h=$('#qHand');h.innerHTML='';(Q?.hand||[]).forEach(c=>h.appendChild(cardEl(c,playCard)));
+const p=$('#qPlayed');p.innerHTML='';(Q?.played||[]).forEach(c=>p.appendChild(cardEl(c,()=>{})));
+$('#qInfo').textContent=Q?`${Q.world} · Turns left: ${Q.turns} · Score: ${Q.played.reduce((a,c)=>a+c.stats.power,0)}`:'No quest running'}
+function playCard(c){if(!Q||Q.done)return;if(Q.turns<=0)return endQuest(false);
+Q.hand=Q.hand.filter(x=>x.cardId!==c.cardId);Q.played.push(c);Q.turns--;
+const kinds=Q.played.map(x=>x.kind);const operated=kinds.includes('zone')&&kinds.filter(k=>['agent','advisor'].includes(k)).length>=2;
+const seats=kinds.filter(k=>k==='seat').length;const governed=operated&&kinds.includes('council')&&seats>=2;
+if(governed)return endQuest(true,`🏛️ QUORUM REACHED — Council + ${seats} Seats played. Mission enacted by the Steward Council (2-of-3). Agents operated; people governed.`);
+if(Q.turns<=0)return endQuest(false);renderQuest();
+log(`Played ${c.name} (${c.kind}). ${operated?'✅ Operated (Zone + 2 Agents/Advisors). Now Govern: play Council + 2 Seats.':'Operate: play 1 Zone + 2 Agents/Advisors.'} Turns left: ${Q.turns}`)}
+function endQuest(won,msg){Q.done=true;const score=Q.played.reduce((a,c)=>a+c.stats.power,0);
+if(won&&!wins.includes(Q.world)){wins.push(Q.world);save()}
+renderQuest();log((won?'🎉 QUEST COMPLETE':'💀 QUEST FAILED — turns ran out before a quorum could enact the mission.')+` World: ${Q.world} · Final score: ${score}. `+(msg||''))}
+function renderCampaign(){const tiers=['Fundamentals','Applied','Mastery'];$('#ladder').innerHTML=tiers.map((t,i)=>
+`<div class="panel"><h4>Tier ${i+1} — ${t}</h4><p class="kv">${i===0?'Home district: the Holodeck. Win any 3 world quests to advance.':i===1?'Win 3 more world quests (8 turns each).':'Win 3 more world quests (6 turns each).'}</p></div>`).join('');
+$('#rankLine').textContent=`Worlds completed: ${wins.length} — ${wins.join(', ')||'none yet'} · Rank: ${wins.length>=9?'Mastery Steward':wins.length>=6?'Applied Builder':wins.length>=3?'Fundamentals Builder':'Holodeck Recruit'}`}
+async function init(){const res=await fetch('data/cards.enriched.json');const data=await res.json();CARDS=data.cards;CARDS.forEach(c=>byId[c.cardId]=c);
+$('#counts').textContent=`Loaded ${CARDS.length} cards · ${new Set(CARDS.map(c=>c.world)).length} worlds · Rarities (game-designed): ${Object.entries(CARDS.reduce((a,c)=>(a[c.rarity]=(a[c.rarity]||0)+1,a),{})).map(([k,v])=>k+' '+v).join(' · ')}`;
+[...new Set(CARDS.map(c=>c.world))].sort().forEach(w=>{$('#fWorld').innerHTML+=`<option value="${w}">${CARDS.find(c=>c.world===w).worldName}</option>`;$('#qWorld').innerHTML+=`<option value="${w}">${CARDS.find(c=>c.world===w).worldName}</option>`});
+[...new Set(CARDS.map(c=>c.kind))].sort().forEach(k=>$('#fKind').innerHTML+=`<option>${k}</option>`);
+[...new Set(CARDS.map(c=>c.rarity))].forEach(r=>$('#fRarity').innerHTML+=`<option>${r}</option>`);
+if(!owned.size){const starter=[...CARDS.filter(c=>c.rarity==='Common').slice(0,12),...CARDS.filter(c=>c.rarity==='Uncommon').slice(0,8),...CARDS.filter(c=>c.rarity==='Rare').slice(0,6),...CARDS.filter(c=>['council','seat'].includes(c.kind)).slice(0,4)];
+starter.forEach(c=>owned.add(c.cardId));save()}
+renderGrid();renderDeck();renderCampaign()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+document.querySelectorAll('main section').forEach(s=>s.hidden=true);$('#v-'+b.dataset.v).hidden=false;if(b.dataset.v==='campaign')renderCampaign();if(b.dataset.v==='packs')renderDeck()});
+['q','fWorld','fKind','fRarity'].forEach(id=>$('#'+id).addEventListener('input',()=>{shown=120;renderGrid()}));
+$('#more').onclick=()=>{shown+=240;renderGrid()};
+$('#openPack').onclick=()=>{const out=$('#packOut');out.innerHTML='';for(let i=0;i<5;i++){const c=CARDS[Math.floor(Math.random()*CARDS.length)];owned.add(c.cardId);out.appendChild(cardEl(c))}save();renderDeck()};
+$('#autoDeck').onclick=()=>{deck=[];const pick=(pred,n)=>{for(const c of CARDS){if(deck.length>=20||n<=0)break;if(pred(c)&&!deck.includes(c.cardId)){deck.push(c.cardId);n--}}};
+pick(c=>c.kind==='council',1);pick(c=>c.kind==='seat',2);pick(c=>c.rarity==='Mythic',1);pick(c=>c.rarity==='Legendary',2);pick(()=>true,20);save();renderDeck()};
+$('#clearDeck').onclick=()=>{deck=[];save();renderDeck()};
+$('#startQuest').onclick=startQuest;$('#modal').onclick=e=>{if(e.target.id==='modal')e.target.classList.remove('open')};
+init().catch(e=>{$('#counts').textContent='Failed to load cards.enriched.json: '+e.message});
+</script></body></html>
