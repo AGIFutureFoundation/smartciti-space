@@ -1,0 +1,961 @@
+{
+ "schema": "smart-citi-game/worlds.environments/1.2",
+ "count": 41,
+ "note": "Environment presentation layer for the Smart Citi game. tagline/description/landmarks/districts are copied verbatim from each world's Master Cards (source schema smartcitix-master-cards/0.1). biome/biomeIcon/hue are game-designed presentation (deterministic keyword rule over the world's own name and tagline — see UPGRADE-PLAN.md), not source data. Game cards only — nothing is minted, deployed, or offered for sale.",
+ "biomeRule": "First-match keyword scan of (world slug + world name + tagline): health terms -> Clinic Quarter; robotics -> Machine Floor; payments/blockchain -> Ledger District; education/academy/locator -> Academy Grounds; climate/ecology/solar -> Green Belt; empathic -> Quiet Quarter; default -> Civic Core.",
+ "worlds": [
+  {
+   "world": "agentic-payments",
+   "worldName": "Agentic Payments",
+   "hue": 307,
+   "biome": "Ledger District",
+   "biomeIcon": "🧾",
+   "tagline": "Agents that transact, buy, sell, provision services and manage budgets - with every transfer of funds held for human stewards",
+   "description": "Agents that transact, buy, sell, provision services and manage budgets - with every transfer of funds held for human stewards.",
+   "landmarks": {
+    "plaza": "Agentic Payments Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Agentic Payments Coordinator",
+    "omega": "Omega Steward · Agentic Payments"
+   },
+   "districts": [
+    "Budget Office",
+    "Financial Infrastructure Gateway",
+    "Service Provisioning Counter",
+    "Transaction Desk"
+   ],
+   "cardCount": 21
+  },
+  {
+   "world": "agents-deploy-infrastructure",
+   "worldName": "Agents That Deploy Infrastructure",
+   "hue": 282,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Agents that take software from an idea to something running in production - provisioning, deploying, configuring and operating the stack",
+   "description": "Agents that take software from an idea to something running in production - provisioning, deploying, configuring and operating the stack.",
+   "landmarks": {
+    "plaza": "Agents That Deploy Infra… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Agents That Deploy Infrastructure Coordinator",
+    "omega": "Omega Steward · Agents That Deploy Infrastructure"
+   },
+   "districts": [
+    "Deployment Bay",
+    "Domain Registry Desk",
+    "Idea Bench",
+    "Operations Deck",
+    "Provisioning Yard",
+    "Service Configuration Room"
+   ],
+   "cardCount": 24
+  },
+  {
+   "world": "autonomous-organizations",
+   "worldName": "Autonomous Organizations",
+   "hue": 355,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Teams of agents that coordinate through Slack, Linear and other surfaces to reach a high-level goal - assigning, communicating, deciding and executing with minimal human intervention",
+   "description": "Teams of agents that coordinate through Slack, Linear and other surfaces to reach a high-level goal - assigning, communicating, deciding and executing with minimal human intervention.",
+   "landmarks": {
+    "plaza": "Autonomous Organizations… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Autonomous Organizations Coordinator",
+    "omega": "Omega Steward · Autonomous Organizations"
+   },
+   "districts": [
+    "Assignment Board",
+    "Coordination Floor",
+    "Decision Room",
+    "Execution Bay",
+    "Goal Wall"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "biota-blockchain",
+   "worldName": "Biota.blockchain (BioDAO.X)",
+   "hue": 140,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "AI-driven platform for personalized therapies, with blockchain transparency and a DAO framework",
+   "description": "AI-driven platform for personalized therapies, with blockchain transparency and a DAO framework. Biota.blockchain (BioDAO.",
+   "landmarks": {
+    "plaza": "Biota.blockchain (BioDAO… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Biota.blockchain (BioDAO.X) Coordinator",
+    "omega": "Omega Steward · BioDao.Blockchain"
+   },
+   "districts": [
+    "Biopharma AGI Agents Hub",
+    "DAO Governance Hall",
+    "Healthcare Data Exchange",
+    "Multi-Blockchain Ledger",
+    "Personalized Therapy Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "cancer-dao",
+   "worldName": "Cancer DAO",
+   "hue": 133,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "A mission-focused DAO for cancer research support, agent-managed and human-governed",
+   "description": "A mission-focused DAO for cancer research support, agent-managed and human-governed.",
+   "landmarks": {
+    "plaza": "Cancer DAO Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Cancer DAO Coordinator",
+    "omega": "Omega Steward · Cancer DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "climate-dao",
+   "worldName": "Climate DAO",
+   "hue": 218,
+   "biome": "Green Belt",
+   "biomeIcon": "🌿",
+   "tagline": "A mission-focused DAO for climate resilience, agent-managed and human-governed",
+   "description": "A mission-focused DAO for climate resilience, agent-managed and human-governed.",
+   "landmarks": {
+    "plaza": "Climate DAO Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Climate DAO Coordinator",
+    "omega": "Omega Steward · Climate DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "diagnostic-x",
+   "worldName": "Diagnostic.X",
+   "hue": 266,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Revolutionary 4D medical imaging in the metaverse",
+   "description": "Revolutionary 4D medical imaging in the metaverse. Diagnostic.",
+   "landmarks": {
+    "plaza": "Diagnostic.X Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Diagnostic.X Coordinator",
+    "omega": "Omega Steward · Diagnostic.X"
+   },
+   "districts": [
+    "4D Imaging Room",
+    "Medical Kiosk",
+    "Metaverse Medical Office",
+    "Virtual Molecular Lab"
+   ],
+   "cardCount": 20
+  },
+  {
+   "world": "ecology-dao",
+   "worldName": "Ecology DAO",
+   "hue": 267,
+   "biome": "Green Belt",
+   "biomeIcon": "🌿",
+   "tagline": "A mission-focused DAO for ecology and biodiversity, agent-managed and human-governed",
+   "description": "A mission-focused DAO for ecology and biodiversity, agent-managed and human-governed.",
+   "landmarks": {
+    "plaza": "Ecology DAO Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Ecology DAO Coordinator",
+    "omega": "Omega Steward · Ecology DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "education-dao",
+   "worldName": "Education DAO",
+   "hue": 109,
+   "biome": "Academy Grounds",
+   "biomeIcon": "🎓",
+   "tagline": "A mission-focused DAO for education, agent-managed and human-governed",
+   "description": "A mission-focused DAO for education, agent-managed and human-governed.",
+   "landmarks": {
+    "plaza": "Education DAO Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Education DAO Coordinator",
+    "omega": "Omega Steward · Education DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "empathic-x",
+   "worldName": "Empathic.X",
+   "hue": 18,
+   "biome": "Quiet Quarter",
+   "biomeIcon": "🕊️",
+   "tagline": "Empathy & Emotional Intelligence",
+   "description": "Empathy & Emotional Intelligence. Empathic.",
+   "landmarks": {
+    "plaza": "Empathic.X Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Empathic.X Coordinator",
+    "omega": "Omega Steward · Empathic.X"
+   },
+   "districts": [
+    "Other-Reader Commons",
+    "Practitioner Workshop",
+    "Repairer's Hall",
+    "Room-Reader Plaza",
+    "Self-Reader Grove"
+   ],
+   "cardCount": 22
+  },
+  {
+   "world": "locator-x",
+   "worldName": "Locator.X",
+   "hue": 321,
+   "biome": "Academy Grounds",
+   "biomeIcon": "🎓",
+   "tagline": "Real-estate development and investment predictive tooling, plus the Academy that teaches it",
+   "description": "Real-estate development and investment predictive tooling, plus the Academy that teaches it. Locator.",
+   "landmarks": {
+    "plaza": "Locator.X Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Locator.X Coordinator",
+    "omega": "Omega Steward · Locator.X"
+   },
+   "districts": [
+    "Evidence Layer",
+    "Louisiana Developer Desk",
+    "Market Editions",
+    "Master Dashboard",
+    "The Academy",
+    "Underwriting Desk"
+   ],
+   "cardCount": 24
+  },
+  {
+   "world": "public-health-dao",
+   "worldName": "Public Health DAO",
+   "hue": 77,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "A mission-focused DAO for public health, agent-managed and human-governed",
+   "description": "A mission-focused DAO for public health, agent-managed and human-governed.",
+   "landmarks": {
+    "plaza": "Public Health DAO Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Public Health DAO Coordinator",
+    "omega": "Omega Steward · Public Health DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "robotics-dao",
+   "worldName": "Robotics DAO",
+   "hue": 52,
+   "biome": "Machine Floor",
+   "biomeIcon": "🤖",
+   "tagline": "A mission-focused DAO for robotics and automation; physical-AI deployment governance, agent-managed and human-governed",
+   "description": "A mission-focused DAO for robotics and automation; physical-AI deployment governance, agent-managed and human-governed.",
+   "landmarks": {
+    "plaza": "Robotics DAO Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Robotics DAO Coordinator",
+    "omega": "Omega Steward · Robotics DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23,
+   "roboticsLab": {
+    "title": "Robotics Training Lab — concept environment",
+    "lines": [
+     "In development.",
+     "The training lab is a plan — Stage 1 of a facility spec.",
+     "No site is selected; no program is enrolling.",
+     "Simulations shown are concept environments — practice before metal moves."
+    ],
+    "source": "goals/highlight-productions-2026-11/briefs/robotics-simulations-training.md (mandatory overlay lines, verbatim)"
+   }
+  },
+  {
+   "world": "s04-curable-x",
+   "worldName": "Curable.X (Series 4)",
+   "hue": 79,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 4 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 4 of W3 LLC: an agent-managed, human-governed DAO cell. Curable.",
+   "landmarks": {
+    "plaza": "Curable.X (Series 4) Pla… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Curable.X (Series 4) Coordinator",
+    "omega": "Omega Steward · Curable.X"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s05-biopharma-go",
+   "worldName": "BioPharma.Go (Series 5)",
+   "hue": 117,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 5 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 5 of W3 LLC: an agent-managed, human-governed DAO cell. BioPharma.",
+   "landmarks": {
+    "plaza": "BioPharma.Go (Series 5)… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "BioPharma.Go (Series 5) Coordinator",
+    "omega": "Omega Steward · BioPharma.Go"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s06-blockchain",
+   "worldName": "Blockchain (Series 6)",
+   "hue": 160,
+   "biome": "Ledger District",
+   "biomeIcon": "🧾",
+   "tagline": "Series 6 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 6 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Blockchain (Series 6) Pl… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Blockchain (Series 6) Coordinator",
+    "omega": "Omega Steward · Blockchain"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s07-divine-dao",
+   "worldName": "Divine.DAO (Series 7)",
+   "hue": 295,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 7 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 7 of W3 LLC: an agent-managed, human-governed DAO cell. Divine.",
+   "landmarks": {
+    "plaza": "Divine.DAO (Series 7) Pl… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Divine.DAO (Series 7) Coordinator",
+    "omega": "Omega Steward · Divine.DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s09-astrological-x",
+   "worldName": "Astrological.X (Series 9)",
+   "hue": 214,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 9 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 9 of W3 LLC: an agent-managed, human-governed DAO cell. Astrological.",
+   "landmarks": {
+    "plaza": "Astrological.X (Series 9… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Astrological.X (Series 9) Coordinator",
+    "omega": "Omega Steward · Astrological.X"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s11-molecular",
+   "worldName": "Molecular (Series 11)",
+   "hue": 262,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 11 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 11 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Molecular (Series 11) Pl… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Molecular (Series 11) Coordinator",
+    "omega": "Omega Steward · Molecular"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s12-parking-smart-x",
+   "worldName": "Parking Smart.X (Series 12)",
+   "hue": 118,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 12 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 12 of W3 LLC: an agent-managed, human-governed DAO cell. Parking Smart.",
+   "landmarks": {
+    "plaza": "Parking Smart.X (Series… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Parking Smart.X (Series 12) Coordinator",
+    "omega": "Omega Steward · Parking Smart.X"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s13-gonstead-x",
+   "worldName": "Gonstead.X (Series 13)",
+   "hue": 348,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 13 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 13 of W3 LLC: an agent-managed, human-governed DAO cell. Gonstead.",
+   "landmarks": {
+    "plaza": "Gonstead.X (Series 13) P… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Gonstead.X (Series 13) Coordinator",
+    "omega": "Omega Steward · Gonstead.X"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s14-askdoc-x",
+   "worldName": "AskDoc.X (Series 14)",
+   "hue": 65,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 14 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 14 of W3 LLC: an agent-managed, human-governed DAO cell. AskDoc.",
+   "landmarks": {
+    "plaza": "AskDoc.X (Series 14) Pla… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "AskDoc.X (Series 14) Coordinator",
+    "omega": "Omega Steward · AskDoc.X"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s15-romanbridge-dao",
+   "worldName": "RomanBridge DAO (Series 15)",
+   "hue": 157,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 15 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 15 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "RomanBridge DAO (Series… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "RomanBridge DAO (Series 15) Coordinator",
+    "omega": "Omega Steward · RomanBridge DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s16-echodawn-dao",
+   "worldName": "EchoDawn DAO (Series 16)",
+   "hue": 227,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 16 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 16 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "EchoDawn DAO (Series 16)… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "EchoDawn DAO (Series 16) Coordinator",
+    "omega": "Omega Steward · EchoDawn DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s17-curable-blockchain-dao",
+   "worldName": "Curable.Blockchain DAO (Series 17)",
+   "hue": 304,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 17 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 17 of W3 LLC: an agent-managed, human-governed DAO cell. Curable.",
+   "landmarks": {
+    "plaza": "Curable.Blockchain DAO (… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Curable.Blockchain DAO (Series 17) Coordinator",
+    "omega": "Omega Steward · Curable.Blockchain DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s19-moscone-x",
+   "worldName": "Moscone.X (Series 19)",
+   "hue": 77,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 19 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 19 of W3 LLC: an agent-managed, human-governed DAO cell. Moscone.",
+   "landmarks": {
+    "plaza": "Moscone.X (Series 19) Pl… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Moscone.X (Series 19) Coordinator",
+    "omega": "Omega Steward · Moscone.X"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s20-cmmc",
+   "worldName": "CMMC (Series 20)",
+   "hue": 164,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 20 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 20 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "CMMC (Series 20) Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "CMMC (Series 20) Coordinator",
+    "omega": "Omega Steward · CMMC"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s21-incubator-dao",
+   "worldName": "Incubator DAO (Series 21)",
+   "hue": 139,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 21 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 21 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Incubator DAO (Series 21… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Incubator DAO (Series 21) Coordinator",
+    "omega": "Omega Steward · Incubator DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s22-get-delivery-dao",
+   "worldName": "Get.Delivery DAO (Series 22)",
+   "hue": 106,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 22 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 22 of W3 LLC: an agent-managed, human-governed DAO cell. Get.",
+   "landmarks": {
+    "plaza": "Get.Delivery DAO (Series… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Get.Delivery DAO (Series 22) Coordinator",
+    "omega": "Omega Steward · Get.Delivery DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s23-avatar-chat",
+   "worldName": "Avatar.Chat (Series 23)",
+   "hue": 251,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 23 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 23 of W3 LLC: an agent-managed, human-governed DAO cell. Avatar.",
+   "landmarks": {
+    "plaza": "Avatar.Chat (Series 23)… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Avatar.Chat (Series 23) Coordinator",
+    "omega": "Omega Steward · Avatar.Chat"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s24-donatello-dao",
+   "worldName": "Donatello DAO (Series 24)",
+   "hue": 197,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 24 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 24 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Donatello DAO (Series 24… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Donatello DAO (Series 24) Coordinator",
+    "omega": "Omega Steward · Donatello DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s25-mypet-ai",
+   "worldName": "MyPet.AI (Series 25)",
+   "hue": 289,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 25 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 25 of W3 LLC: an agent-managed, human-governed DAO cell. MyPet.",
+   "landmarks": {
+    "plaza": "MyPet.AI (Series 25) Pla… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "MyPet.AI (Series 25) Coordinator",
+    "omega": "Omega Steward · MyPet.AI"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s26-lyka-dao",
+   "worldName": "Lyka DAO (Series 26)",
+   "hue": 150,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 26 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 26 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Lyka DAO (Series 26) Pla… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Lyka DAO (Series 26) Coordinator",
+    "omega": "Omega Steward · Lyka DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s27-genomic-dao",
+   "worldName": "Genomic.DAO (Series 27)",
+   "hue": 96,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 27 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 27 of W3 LLC: an agent-managed, human-governed DAO cell. Genomic.",
+   "landmarks": {
+    "plaza": "Genomic.DAO (Series 27)… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Genomic.DAO (Series 27) Coordinator",
+    "omega": "Omega Steward · Genomic.DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s28-genomic-blockchain",
+   "worldName": "Genomic.Blockchain (Series 28)",
+   "hue": 77,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 28 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 28 of W3 LLC: an agent-managed, human-governed DAO cell. Genomic.",
+   "landmarks": {
+    "plaza": "Genomic.Blockchain (Seri… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Genomic.Blockchain (Series 28) Coordinator",
+    "omega": "Omega Steward · Genomic.Blockchain"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s29-metaverse-dao",
+   "worldName": "Metaverse DAO (Series 29)",
+   "hue": 242,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 29 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 29 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Metaverse DAO (Series 29… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Metaverse DAO (Series 29) Coordinator",
+    "omega": "Omega Steward · Metaverse DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s31-aerospace-dao",
+   "worldName": "Aerospace DAO (Series 31)",
+   "hue": 30,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 31 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 31 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Aerospace DAO (Series 31… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Aerospace DAO (Series 31) Coordinator",
+    "omega": "Omega Steward · Aerospace DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s32-solar-dao",
+   "worldName": "Solar DAO (Series 32)",
+   "hue": 259,
+   "biome": "Green Belt",
+   "biomeIcon": "🌿",
+   "tagline": "Series 32 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 32 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Solar DAO (Series 32) Pl… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Solar DAO (Series 32) Coordinator",
+    "omega": "Omega Steward · Solar DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s33-infogurus",
+   "worldName": "InfoGurus (Series 33)",
+   "hue": 266,
+   "biome": "Civic Core",
+   "biomeIcon": "🏛️",
+   "tagline": "Series 33 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 33 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "InfoGurus (Series 33) Pl… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "InfoGurus (Series 33) Coordinator",
+    "omega": "Omega Steward · InfoGurus"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s34-als-dao",
+   "worldName": "ALS DAO (Series 34)",
+   "hue": 156,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 34 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 34 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "ALS DAO (Series 34) Plaza · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "ALS DAO (Series 34) Coordinator",
+    "omega": "Omega Steward · ALS DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  },
+  {
+   "world": "s35-parkinsons-dao",
+   "worldName": "Parkinsons DAO (Series 35)",
+   "hue": 93,
+   "biome": "Clinic Quarter",
+   "biomeIcon": "⚕️",
+   "tagline": "Series 35 of W3 LLC: an agent-managed, human-governed DAO cell",
+   "description": "Series 35 of W3 LLC: an agent-managed, human-governed DAO cell.",
+   "landmarks": {
+    "plaza": "Parkinsons DAO (Series 3… · Powered by AGI Corp",
+    "gate": "Alignment Evaluation Gate · Powered by AGI Corp",
+    "coordinator": "Parkinsons DAO (Series 35) Coordinator",
+    "omega": "Omega Steward · Parkinsons DAO"
+   },
+   "districts": [
+    "Charter Hall",
+    "Operations Deck",
+    "Progress Observatory",
+    "Proposal Forum",
+    "Research Synthesis Lab"
+   ],
+   "cardCount": 23
+  }
+ ]
+}

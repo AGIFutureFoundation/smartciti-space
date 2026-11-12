@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Citi — The Master Card Game</title>
 <meta name="description" content="The Smart Citi game: 939 Master Cards across 41 worlds. Play the card quest built from the WorldForge worlds. The game is not minted and not for sale.">
+<title>Smart Citi — The Master Card Game</title>
 <style>
 :root{--bg:#0b0e1a;--panel:#141830;--panel2:#1b2044;--ink:#eef0ff;--muted:#9aa3d0;--gold:#ffd76a;--line:#2c3260}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 600px at 50% -10%,#232a5e,var(--bg));color:var(--ink);font-family:system-ui,Segoe UI,Roboto,sans-serif}
@@ -33,6 +33,19 @@ main{max-width:1180px;margin:0 auto;padding:10px 16px 60px}
 .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:2px;font-size:12px}
 .win{color:#3ecf6e;font-weight:700}.lose{color:#ff6b81;font-weight:700}
 .ladder{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.envbanner{--h:230;border-radius:14px;padding:16px 18px;margin:12px 0;border:1px solid var(--line);background:linear-gradient(120deg,hsl(var(--h),65%,26%),#141830 72%);display:none}
+.envbanner.show{display:block}
+.envbanner h3{margin:2px 0 4px;font-size:21px}
+.envbanner .biome{color:var(--gold);font-weight:700;letter-spacing:.06em;font-size:12px;text-transform:uppercase}
+.envbanner .tag{font-style:italic;color:#dfe3ff}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.pips{display:flex;gap:8px;align-items:center;margin:10px 0;font-size:14px;flex-wrap:wrap}
+.pip{border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
+.pip.done{border-color:#3ecf6e;color:#3ecf6e}
+.pip.now{border-color:var(--gold);color:var(--gold)}
+.labcard{background:#14202e;border:1px solid #2e6da4;border-radius:10px;padding:10px 14px;margin-top:10px;font-size:14px;line-height:1.55}
+.labcard b{color:#7db9e8}
+#v-quest .panel{background:linear-gradient(165deg,hsl(var(--h,230),45%,16%),var(--panel) 55%)}
 footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
 </style></head><body>
 <header><h1>✨ SMART CITI</h1>
@@ -51,6 +64,7 @@ footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
 <select id="fKind"><option value="">All kinds</option></select>
 <select id="fRarity"><option value="">All rarities</option></select>
 <span id="shown" class="pill"></span></div>
+<div class="envbanner" id="worldBanner"></div>
 <div class="grid" id="grid"></div>
 <button class="btn" id="more">Show more</button></section>
 
@@ -70,6 +84,8 @@ footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
 <p>Pick a world. You are dealt that world's real cards. <b>Operate:</b> play 1 Zone + any 2 Agents/Advisors. <b>Govern:</b> then enact the mission by playing its Council card + at least <b>2 of its 3 Seat cards</b> (Steward Council 2-of-3 quorum — human-reserved actions can never be played by agents alone). Finish before turns run out. Score = total Power of cards played.</p>
 <select id="qWorld"></select> <button class="btn" id="startQuest">Start quest</button>
 <span class="pill" id="qInfo">No quest running</span>
+<div id="entryPanel"></div>
+<div class="pips" id="phasePips"></div>
 <h3>Your hand — click to play</h3><div class="hand" id="qHand"></div>
 <h3>Played</h3><div class="hand" id="qPlayed"></div>
 <div class="log" id="qLog">The Holodeck is your home district. Choose a world to begin.</div>
@@ -81,15 +97,26 @@ footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
 <div class="ladder" id="ladder"></div><p id="rankLine"></p></div></section>
 </main>
 <div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
-<footer>Smart Citi v1.1 · Local build only · Data: game/data/cards.enriched.json (939 cards, 939 unique descriptions — v1.1 description-coverage fixes) · Source schema smartcitix-master-cards/0.1</footer>
+<footer>Smart Citi v1.2 · Local build · Data: game/data/cards.enriched.json (939 cards, 939 unique descriptions) + game/data/worlds.environments.json (41 world environments — place names verbatim from source cards, biomes game-designed) · Source schema smartcitix-master-cards/0.1</footer>
 <script>
-const $=s=>document.querySelector(s); let CARDS=[],byId={},shown=120;
+const $=s=>document.querySelector(s); let CARDS=[],byId={},shown=120; let ENV={},ENVW={};
 const owned=new Set(JSON.parse(localStorage.getItem('sc-owned')||'[]'));
 let deck=JSON.parse(localStorage.getItem('sc-deck')||'[]');
 let wins=JSON.parse(localStorage.getItem('sc-wins')||'[]');
 const save=()=>{localStorage.setItem('sc-owned',JSON.stringify([...owned]));localStorage.setItem('sc-deck',JSON.stringify(deck));localStorage.setItem('sc-wins',JSON.stringify(wins));};
 const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const envOf=w=>ENVW[w]||null;
+const cleanName=n=>String(n||'').replace(/ · Powered by AGI Corp$/,'');
+function chips(e){const L=e.landmarks;const parts=[['🏛️ Plaza',L.plaza],['🚪 Gate',L.gate],['🧭 Coordinator',L.coordinator],['♾️ Omega',L.omega]].filter(([,v])=>v).map(([k,v])=>`<span class="pill">${k}: ${esc(cleanName(v))}</span>`).join('');
+return `<div class="chips">${parts}</div><div class="chips">${e.districts.map(d=>`<span class="pill">📍 ${esc(d)}</span>`).join('')}</div>`}
+function labHTML(e){if(!e||!e.roboticsLab)return '';return `<div class="labcard"><b>🤖 ${esc(e.roboticsLab.title)}</b><br>${e.roboticsLab.lines.map(esc).join('<br>')}</div>`}
+function envBannerHTML(e,heading){return `<div class="biome">${e.biomeIcon} ${esc(e.biome)} · game-designed biome</div><h3>${esc(heading||e.worldName)}</h3><div class="tag">“${esc(e.tagline)}”</div><p class="kv" style="color:#c9cdf2">${esc(e.description)}</p>${chips(e)}${labHTML(e)}`}
+function envDetailHTML(e){return `<div class="labcard" style="background:#171a38;border-color:var(--line)"><b style="color:var(--gold)">${e.biomeIcon} Environment — ${esc(e.biome)}</b> <span class="kv">(biome is game-designed presentation; the names below are this world's real Master Cards)</span><br><i>“${esc(e.tagline)}”</i>${chips(e)}</div>${labHTML(e)}`}
+function renderPips(){const p=$('#phasePips');if(!p)return;if(!Q){p.innerHTML='';return}
+const kinds=Q.played.map(x=>x.kind);const operated=kinds.includes('zone')&&kinds.filter(k=>['agent','advisor'].includes(k)).length>=2;
+const governed=operated&&kinds.includes('council')&&kinds.filter(k=>k==='seat').length>=2;
+p.innerHTML=`<span class="pip ${operated?'done':'now'}">${operated?'✅':'🛠️'} Operate — 1 Zone + 2 Agents/Advisors</span><span>→</span><span class="pip ${governed?'done':operated?'now':''}">${governed?'✅':'🏛️'} Govern — Council + 2 Seats (quorum)</span>`}
 function cardEl(c,onclick){const d=document.createElement('div');d.className='card r-'+c.rarity;d.dataset.r=c.rarity;d.style.setProperty('--h',hue(c.world));
 d.innerHTML=`<div class="in"><div class="ic">${c.icon}</div><span class="rbadge">${c.rarity} · ${c.kind}</span><h4>${esc(c.name)}</h4><div class="meta">${esc(c.worldName)}</div><div class="desc">${esc(c.description)}</div><div class="stats"><span>⚡ ${c.stats.power}</span><span>🔨 ${c.stats.build}</span><span>Cost ${c.stats.cost}</span></div></div>`;
 d.onclick=()=>onclick?onclick(c):detail(c);return d}
@@ -99,6 +126,7 @@ function detail(c){$('#modalBox').innerHTML=`<h3>${c.icon} ${esc(c.name)}</h3><p
 <b>Permissions:</b> ${Object.entries(c.permissions).map(([k,v])=>k+': '+(v||[]).join(', ')).join(' · ')}<br>
 <b>Reserved for humans (Steward Council 2-of-3):</b> ${(c.reservedForHumans||[]).join(', ')}<br>
 <b>Description built from source fields:</b> ${(c.descriptionSourceFields||[]).join(', ')}</p>
+${c.kind==='world'&&ENVW[c.world]?envDetailHTML(ENVW[c.world]):''}
 <button class="btn" onclick="toggleDeck('${c.cardId.replace(/'/g,"")}')">${deck.includes(c.cardId)?'Remove from deck':'Add to deck'}</button>
 <button class="btn" onclick="document.querySelector('#modal').classList.remove('open')">Close</button>`;$('#modal').classList.add('open')}
 window.toggleDeck=id=>{deck=deck.includes(id)?deck.filter(x=>x!==id):(validateAdd(id),deck);save();renderDeck();detail(byId[id])};
@@ -108,7 +136,10 @@ if(c.rarity==='Legendary'&&deck.filter(x=>byId[x].rarity==='Legendary').length>=
 if(cnt(c.kind)>=4)return alert('Max 4 of any one kind.');deck.push(id)}
 function filtered(){const q=$('#q').value.toLowerCase(),w=$('#fWorld').value,k=$('#fKind').value,r=$('#fRarity').value;
 return CARDS.filter(c=>(!w||c.world===w)&&(!k||c.kind===k)&&(!r||c.rarity===r)&&(!q||(c.name+' '+c.description+' '+c.cardId).toLowerCase().includes(q)))}
-function renderGrid(){const f=filtered();$('#shown').textContent=f.length+' cards';const g=$('#grid');g.innerHTML='';
+function renderGrid(){const f=filtered();$('#shown').textContent=f.length+' cards';
+const wsel=$('#fWorld').value,be=$('#worldBanner');
+if(wsel&&ENVW[wsel]){const e=ENVW[wsel];be.className='envbanner show';be.style.setProperty('--h',e.hue);be.innerHTML=envBannerHTML(e)}else{be.className='envbanner';be.innerHTML=''}
+const g=$('#grid');g.innerHTML='';
 f.slice(0,shown).forEach(c=>g.appendChild(cardEl(c)));$('#more').style.display=f.length>shown?'':'none'}
 function renderDeck(){$('#ownedCount').textContent=owned.size;$('#deckCount').textContent=deck.length;
 const dv=$('#deckView');dv.innerHTML='';deck.forEach(id=>byId[id]&&dv.appendChild(cardEl(byId[id],c=>{deck=deck.filter(x=>x!==c.cardId);save();renderDeck()})));
@@ -119,12 +150,16 @@ function startQuest(){const w=$('#qWorld').value,tier=Math.min(2,Math.floor(wins
 const pool=CARDS.filter(c=>c.world===w);Q={world:w,turns:10-tier*2,played:[],done:false};
 Q.hand=[...pool.filter(c=>['zone'].includes(c.kind)).slice(0,2),...pool.filter(c=>['agent','advisor'].includes(c.kind)).slice(0,4),
 ...pool.filter(c=>c.kind==='council'),...pool.filter(c=>c.kind==='seat'),...pool.filter(c=>['plaza','coordinator','gate','omega'].includes(c.kind)).slice(0,3)];
-Q.hand.forEach(c=>owned.add(c.cardId));save();renderQuest();
-log(`Quest started in ${pool[0].worldName} (Tier ${['Fundamentals','Applied','Mastery'][tier]}). Turns: ${Q.turns}. Operate first: 1 Zone + 2 Agents/Advisors. Then Govern: Council + 2 Seats.`)}
+Q.hand.forEach(c=>owned.add(c.cardId));save();
+const e=envOf(w),ep=$('#entryPanel');
+document.querySelector('#v-quest .panel').style.setProperty('--h',e?e.hue:230);
+if(e){ep.innerHTML=`<div class="envbanner show" style="--h:${e.hue}">${envBannerHTML(e,'Entering '+e.worldName)}</div>`}else ep.innerHTML='';
+renderQuest();
+log(`Quest started in ${pool[0].worldName} (Tier ${['Fundamentals','Applied','Mastery'][tier]}). Turns: ${Q.turns}. Operate first: 1 Zone + 2 Agents/Advisors. Then Govern: Council + 2 Seats.${w==='robotics-dao'?' This quest is a concept-environment simulation — practice before metal moves.':''}`)}
 function log(m){$('#qLog').textContent=m}
 function renderQuest(){const h=$('#qHand');h.innerHTML='';(Q?.hand||[]).forEach(c=>h.appendChild(cardEl(c,playCard)));
 const p=$('#qPlayed');p.innerHTML='';(Q?.played||[]).forEach(c=>p.appendChild(cardEl(c,()=>{})));
-$('#qInfo').textContent=Q?`${Q.world} · Turns left: ${Q.turns} · Score: ${Q.played.reduce((a,c)=>a+c.stats.power,0)}`:'No quest running'}
+$('#qInfo').textContent=Q?`${Q.world} · Turns left: ${Q.turns} · Score: ${Q.played.reduce((a,c)=>a+c.stats.power,0)}`:'No quest running';renderPips()}
 function playCard(c){if(!Q||Q.done)return;if(Q.turns<=0)return endQuest(false);
 Q.hand=Q.hand.filter(x=>x.cardId!==c.cardId);Q.played.push(c);Q.turns--;
 const kinds=Q.played.map(x=>x.kind);const operated=kinds.includes('zone')&&kinds.filter(k=>['agent','advisor'].includes(k)).length>=2;
@@ -139,6 +174,7 @@ function renderCampaign(){const tiers=['Fundamentals','Applied','Mastery'];$('#l
 `<div class="panel"><h4>Tier ${i+1} — ${t}</h4><p class="kv">${i===0?'Home district: the Holodeck. Win any 3 world quests to advance.':i===1?'Win 3 more world quests (8 turns each).':'Win 3 more world quests (6 turns each).'}</p></div>`).join('');
 $('#rankLine').textContent=`Worlds completed: ${wins.length} — ${wins.join(', ')||'none yet'} · Rank: ${wins.length>=9?'Mastery Steward':wins.length>=6?'Applied Builder':wins.length>=3?'Fundamentals Builder':'Holodeck Recruit'}`}
 async function init(){const res=await fetch('data/cards.enriched.json');const data=await res.json();CARDS=data.cards;CARDS.forEach(c=>byId[c.cardId]=c);
+try{const er=await fetch('data/worlds.environments.json');ENV=await er.json();(ENV.worlds||[]).forEach(e=>ENVW[e.world]=e)}catch(_){ENV={};ENVW={}}
 $('#counts').textContent=`Loaded ${CARDS.length} cards · ${new Set(CARDS.map(c=>c.world)).length} worlds · Rarities (game-designed): ${Object.entries(CARDS.reduce((a,c)=>(a[c.rarity]=(a[c.rarity]||0)+1,a),{})).map(([k,v])=>k+' '+v).join(' · ')}`;
 [...new Set(CARDS.map(c=>c.world))].sort().forEach(w=>{$('#fWorld').innerHTML+=`<option value="${w}">${CARDS.find(c=>c.world===w).worldName}</option>`;$('#qWorld').innerHTML+=`<option value="${w}">${CARDS.find(c=>c.world===w).worldName}</option>`});
 [...new Set(CARDS.map(c=>c.kind))].sort().forEach(k=>$('#fKind').innerHTML+=`<option>${k}</option>`);
