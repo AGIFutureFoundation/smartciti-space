@@ -39,8 +39,9 @@ union training environments, a cohort dashboard demo over a bundled sample
 log, a VR entry, and the IWSDK Holodeck Training Centre — ten procedural 3D
 zones on a shared 36×24 shell.
 
-The sibling build, the **Smart Citi card game**, holds **939 cards across 41
-worlds** (designed rarity) — a complete local build, not a deployed product.
+The **Smart Citi card game** is served from this site at `/game/` — **939 cards
+across 41 worlds** (designed rarity), with a how-to-play page at
+`/game/how-to-play.html` and the world index at `/worlds/`.
 
 ## 🎬 Watch
 

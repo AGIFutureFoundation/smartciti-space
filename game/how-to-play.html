@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How to Play — Smart Citi, the Master Card Game · SmartCiti.X</title>
+<meta name="description" content="How to play Smart Citi: build a legal 20-card deck, operate a district, then govern it by quorum. 939 Master Cards across 41 worlds. Designed rarity — not minted, not for sale.">
+<link rel="canonical" href="https://smartciti.space/game/how-to-play.html">
+<link rel="icon" type="image/png" href="../assets/profile.png">
+<style>
+:root{--bg:#0b1220;--panel:#131e33;--ink:#e8eefc;--mut:#9fb0d0;--acc:#ffb020;--line:#26344f;--brand:#ff6b1a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:940px;margin:0 auto;padding:0 16px 56px}
+a{color:#7cc4ff}
+h1{font-size:1.9rem;margin:.6rem 0 .2rem}
+h1 .x{color:var(--brand)}
+h2{font-size:1.25rem;margin:1.4rem 0 .4rem}
+p{margin:.45rem 0}
+.banner{border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;font-size:.95rem}
+.banner.demo{background:#3a2f00;border:1px solid #8a6d00;color:#ffe9a8}
+.banner.proposed{background:#2a1414;border:1px solid #7a2b2b;color:#ffc9c9}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin:1rem 0}
+.mut{color:var(--mut);font-size:.93rem}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td,th{border-bottom:1px solid var(--line);padding:.45rem .4rem;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600}
+ol li,ul li{margin:.3rem 0}
+footer{color:var(--mut);font-size:.88rem;margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem}
+.agi-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;padding:0;list-style:none}
+.agi-chips a{display:inline-block;padding:.45rem .8rem;border:1px solid var(--acc);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem}
+.site-head{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;padding:.9rem 0 .4rem}
+.site-head .brand{font-weight:800;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.site-head .brand .x{color:var(--brand)}
+.site-nav{display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin-left:auto}
+.site-nav a{color:var(--mut);text-decoration:none;font-size:.93rem;font-weight:600}
+.site-nav a:hover{color:var(--ink);text-decoration:underline}
+.lede{font-size:1.08rem;max-width:46rem}
+a.btn{display:inline-block;margin-top:.5rem;background:var(--acc);color:#1a1200;font-weight:800;border-radius:10px;padding:.6rem 1rem;text-decoration:none}
+a.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line);font-weight:600}
+</style>
+</head>
+<body>
+<main>
+<header class="site-head">
+  <a class="brand" href="../index.html">SmartCiti<span class="x">.X</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../index.html">Home</a>
+    <a href="../guide.html">Guide</a>
+    <a href="../learner/index.html">Learner app</a>
+    <a href="../modules/index.html">Modules</a>
+    <a href="../holodeck/about.html">Holodeck</a>
+    <a href="../vr-entry/index.html">VR entry</a>
+    <a href="index.html">Game</a>
+    <a href="../worlds/index.html">Worlds</a>
+    <a href="/library/">Library</a>
+    <a href="/store/">Store</a>
+  </nav>
+</header>
+
+<h1>How to Play — Smart Citi</h1>
+<p class="lede">Smart Citi is the card-quest face of SmartCiti.X: <strong>939 Master
+Cards across 41 worlds</strong>, built from the WorldForge worlds. All 41 quest
+worlds were verified winnable in the local build (V1.1, verified locally). The
+idea of the game is the idea of the city itself, in miniature: agents operate,
+people govern. You play in two halves — first you operate a district, then you
+govern it, and the mission only counts when people enact it.</p>
+<p><a class="btn" href="index.html">Play the Smart Citi game</a>
+<a class="btn ghost" href="../worlds/index.html">Browse the 41 worlds first</a></p>
+
+<div class="banner proposed"><strong>The game is not minted and not for sale.</strong>
+These are game cards only — no chain, no contract, no price. Rarity and stats
+are designed at design time and labelled as designed on every card; they are
+not drawn from play or sales data.</div>
+<div class="banner demo"><strong>Local build only.</strong> Your collection, deck,
+and quest wins live only in this browser (localStorage). Nothing is uploaded,
+and clearing your browser storage clears your game.</div>
+
+<section class="card">
+<h2>1. Start with the collection</h2>
+<p>Open the game and start on the <strong>Collection</strong> tab. Every card shows its
+world, its kind, its designed rarity, and its three stats — Power, Build, and
+Cost. Search by name or description, or filter by world, kind, or rarity when
+you are looking for something specific. Click any card to read its full detail:
+its source card ID, its parent card, and — printed on the card itself — which
+actions are reserved for humans.</p>
+<p>On your first visit the game grants a free <strong>Starter Deck</strong> of 30 cards.
+Packs hold 5 cards, are free, and are unlimited — this is a local game, so
+opening a pack costs nothing and buys nothing.</p>
+</section>
+
+<section class="card">
+<h2>2. Build a legal deck — exactly 20 cards</h2>
+<p>A deck is legal only when it meets every rule below. The game checks the
+rules as you build and tells you plainly when the deck is not legal yet.</p>
+<table>
+<tr><th>Rule</th><th>What it means</th></tr>
+<tr><td>Exactly 20 cards</td><td>No more, no fewer.</td></tr>
+<tr><td>Max 1 Mythic</td><td>One Mythic card per deck.</td></tr>
+<tr><td>Max 3 Legendary</td><td>Up to three Legendary cards per deck.</td></tr>
+<tr><td>Max 4 of any one kind</td><td>Kinds include Zone, Agent, Advisor, Council, Seat, and the other card kinds in the collection.</td></tr>
+<tr><td>At least 1 Council card</td><td>You cannot enact a mission without a Council.</td></tr>
+<tr><td>At least 2 Seat cards</td><td>A mission needs a Steward Council quorum — 2 of 3 Seats.</td></tr>
+</table>
+<p>In the <strong>Packs &amp; Deck</strong> tab you can auto-build a legal deck, clear it,
+and see your owned-card and deck counts. Click a card in the Collection to add
+it to the deck or remove it.</p>
+</section>
+
+<section class="card">
+<h2>3. Run a District Quest — operate, then govern</h2>
+<p>Pick a world in the <strong>Quests</strong> tab and start the quest. You are dealt that
+world's real cards, and the quest runs in the game's two halves:</p>
+<ol>
+<li><strong>Operate:</strong> play 1 Zone card plus any 2 Agent or Advisor cards. This is
+the agents' half — the district is running.</li>
+<li><strong>Govern:</strong> then enact the mission by playing its Council card plus at
+least 2 of its 3 Seat cards. This is the people's half — human-reserved actions
+can never be played by agents alone.</li>
+</ol>
+<p>Finish before your turns run out. Your score is the total Power of the cards
+you played. A quest is complete when the quorum is reached: Council plus Seats,
+with the log line the game was built around — agents operated; people governed.</p>
+</section>
+
+<section class="card">
+<h2>4. Climb the Campaign</h2>
+<p>The <strong>Campaign</strong> tab maps the game onto the SmartCiti.X learner structure —
+strands by tiers: <strong>Fundamentals → Applied → Mastery</strong> — with the Holodeck
+as your home district. Win quests to climb: each tier you clear raises your
+rank, and higher tiers give you fewer turns — 10 turns at Fundamentals, 8 at
+Applied, 6 at Mastery. Win any 3 world quests to advance from a tier. Quest
+wins are saved locally, in this browser only.</p>
+</section>
+
+<section class="card">
+<h2>Designed rarity — the full count</h2>
+<p>Rarity in Smart Citi (Mythic, Legendary, Epic, Rare, Uncommon, Common) is
+<strong>designed rarity</strong>, set at design time and labelled as designed wherever it
+appears. The 939 cards divide as follows, counted from the game's own card
+data (<code>game/data/cards.enriched.json</code>):</p>
+<table>
+<tr><th>Designed rarity</th><th>Cards</th></tr>
+<tr><td>Common</td><td>242</td></tr>
+<tr><td>Uncommon</td><td>246</td></tr>
+<tr><td>Rare</td><td>246</td></tr>
+<tr><td>Epic</td><td>82</td></tr>
+<tr><td>Legendary</td><td>82</td></tr>
+<tr><td>Mythic</td><td>41</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>939</strong></td></tr>
+</table>
+<p class="mut">The game is not minted and not for sale, and designed rarity is
+not a market measure of anything — it is a game-design label, stated as one.</p>
+</section>
+
+<section class="card">
+<h2>Where to go next</h2>
+<p><a href="index.html">Play the game</a> · <a href="../worlds/index.html">The worlds index — all 41 worlds and the six anchors</a> ·
+<a href="../guide.html">The SmartCiti.X guide</a> · <a href="../holodeck/about.html">About the Holodeck</a> ·
+<a href="https://www.agi.lease/">WorldForge VR entry — www.agi.lease</a></p>
+<p class="mut">RP1 status, stated wherever RP1 is mentioned: RP1 CompanyId 130
+is confirmed. <strong>No worlds are live in RP1 yet.</strong></p>
+</section>
+
+<footer>
+  <ul class="agi-chips" aria-label="Follow us">
+    <li><a href="https://www.facebook.com/profile.php?id=61596590964426" rel="noopener" target="_blank">Facebook — SmartCiti.X</a></li>
+    <li><a href="https://www.agicorp.network" rel="noopener" target="_blank">Hub — agicorp.network</a></li>
+  </ul>
+  <p><strong>Site:</strong> <a href="../index.html">Home</a> ·
+  <a href="../guide.html">Guide</a> · <a href="../learner/index.html">Learner app</a> ·
+  <a href="../modules/index.html">Modules</a> · <a href="../holodeck/about.html">Holodeck</a> ·
+  <a href="../vr-entry/index.html">VR entry</a> · <a href="index.html">Game</a> ·
+  <a href="../worlds/index.html">Worlds</a> · <a href="/library/">Library</a> ·
+  <a href="/store/">Store</a></p>
+  <p>SmartCiti.X is one of the corporate holdings in the agentic network.
+  How-to-play page staged 2026-11-11 — staged locally, not pushed or deployed.</p>
+</footer>
+</main>
+</body>
+</html>
