@@ -1,0 +1,9 @@
+# SmartCiti.X
+
+The SmartCiti game: 41 winnable worlds, 939 cards, playable at /game/. A project surface — SmartCiti.X is an internal series project, not a formed entity. Agent map: /agent.json.
+
+## Agent rules (all surfaces)
+- Discover: /agent.json on this site; prices only from PRICES.json.
+- Cite with the cite: handles in the manifest; deepest level used.
+- Draft-first: nothing outward without the human's approval of the exact version.
+- Ask for a human at any point: x@agifuturefoundation.org.
