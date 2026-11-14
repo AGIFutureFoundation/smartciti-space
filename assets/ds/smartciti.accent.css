@@ -1,0 +1,28 @@
+/* SmartCiti.X — accent file. DARK-FIRST site: the page ground is the accent.
+   Playfulness lives inside the system rules: amber/orange energy, ice text,
+   pill geometry stays, targets stay 44px+. Pairs in DESIGN-SYSTEM.md §9.1.
+   Load tokens.css, then this file, then components.css; wrap page content
+   in .ds-dark so components read the dark token scope. */
+:root{
+  --accent:#FFB020;          /* amber — 10.24:1 on ground; ink on it 10.24:1 */
+  --accent-deep:#0B1220;     /* the ground itself */
+  --accent-bright:#FF6B1A;   /* orange — 6.57:1 on ground (text-safe on dark) */
+  --accent-text:#FFB020;
+  --accent-text-alt:#FF6B1A;
+  --on-accent:#0B1220;       /* ink text on amber fills */
+  --hero-ground:#0B1220;
+  --bg:#0B1220;
+  --surface:#131E33;         /* panel navy */
+  --surface-quiet:#131E33;
+  --text:#E8EEFC;            /* ice — 16.11:1 on ground */
+  --text-2:#9FB0D0;          /* muted — 8.55:1 on ground */
+  --text-3:#9FB0D0;
+  --line:rgba(232,238,252,.16);
+  --line-strong:rgba(232,238,252,.4);
+  --link:#FFB020;
+  --focus:#FFB020;            /* 9.10:1 on panel */
+  --ok:#2FBF71;              /* 7.86:1 on ground */
+}
+/* Filled orange actions use orange-deep — white on brand orange fails AA.
+   .ds-btn--primary renders amber with ink text via --on-accent above. */
+.ds-btn--energy{background:#C24E00;color:#fff} /* white on it 4.79:1 */
