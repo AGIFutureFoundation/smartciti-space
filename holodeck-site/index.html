@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SmartCiti.X Holodeck — Step Inside the City That Teaches</title>
+<meta name="description" content="The SmartCiti.X Holodeck: a spatial city-training simulation built on WorldForge and the RP1 fabric — the IWSDK Training Centre, ten procedural 3D zones at anchor 39.846, −86.622. Demo build — no worlds are live in RP1 yet.">
+<link rel="icon" type="image/png" href="https://smartciti.space/assets/profile.png">
+<meta property="og:title" content="SmartCiti.X Holodeck">
+<meta property="og:description" content="A city you can walk, built to teach: trades, robotics, and city systems simulated in one spatial holodeck. Demo build — no worlds are live in RP1 yet.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://smartciti.space/assets/og-cover.png">
+<meta property="og:image:width" content="1640">
+<meta property="og:image:height" content="924">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SmartCiti.X Holodeck">
+<meta name="twitter:description" content="Step inside the SmartCiti.X Holodeck — the IWSDK Training Centre on the WorldForge / RP1 fabric.">
+<meta name="twitter:image" content="https://smartciti.space/assets/og-cover.png">
+<style>
+:root{
+  --bg:#070d1a; --bg2:#0b1220; --panel:#131e33; --panel2:#0d1730;
+  --ink:#e8eefc; --mut:#9fb0d0; --acc:#ffb020; --brand:#ff6b1a;
+  --teal:#2fd4c4; --line:#26344f; --ok:#2fbf71;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+a{color:#7cc4ff}
+main{max-width:1020px;margin:0 auto;padding:0 16px 64px}
+
+/* ---------- header ---------- */
+.site-head{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;padding:1rem 0 .4rem}
+.site-head .brand{font-weight:800;font-size:1.1rem;color:var(--ink);text-decoration:none}
+.site-head .brand .x{color:var(--brand)}
+.site-head .brand .deck{color:var(--teal)}
+.site-nav{display:flex;flex-wrap:wrap;gap:.35rem 1rem;margin-left:auto}
+.site-nav a{color:var(--mut);text-decoration:none;font-size:.93rem;font-weight:600}
+.site-nav a:hover{color:var(--ink);text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  margin:1rem 0 1.2rem;background:var(--bg2)}
+.hero img.cover{display:block;width:100%;height:min(52vw,440px);object-fit:cover;opacity:.92}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,13,26,.05) 30%,rgba(7,13,26,.88) 88%)}
+.hero .hero-in{position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1.6rem 1.6rem}
+.hero .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;
+  font-weight:700;color:var(--teal);margin:0 0 .3rem}
+.hero h1{font-size:clamp(2rem,5.4vw,3.3rem);line-height:1.08;margin:.1rem 0 .5rem}
+.hero h1 .x{color:var(--brand)} .hero h1 .deck{color:var(--teal)}
+.hero .lede{font-size:1.12rem;max-width:44rem;margin:.3rem 0 .6rem}
+.anchor-chip{display:inline-block;border:1px solid var(--teal);color:var(--ink);
+  border-radius:999px;padding:.2rem .8rem;font-size:.9rem;background:rgba(7,13,26,.65)}
+.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0 .2rem}
+a.btn{display:inline-block;background:var(--acc);color:#1a1200;font-weight:800;
+  border-radius:10px;padding:.7rem 1.15rem;text-decoration:none}
+a.btn.teal{background:var(--teal);color:#04231f}
+a.btn.ghost{background:rgba(7,13,26,.55);color:var(--ink);border:2px solid var(--line);font-weight:600}
+
+/* ---------- banners ---------- */
+.banner{border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;font-size:.95rem}
+.banner.demo{background:#3a2f00;border:1px solid #8a6d00;color:#ffe9a8}
+.banner.proposed{background:#2a1414;border:1px solid #7a2b2b;color:#ffc9c9}
+.banner.status{background:#0e2a26;border:1px solid #1f5c52;color:#c9f2ea}
+
+/* ---------- sections & cards ---------- */
+section.block{margin:2.2rem 0 0}
+section.block > h2{font-size:1.55rem;margin:0 0 .4rem}
+section.block > .sub{color:var(--mut);max-width:46rem;margin:.2rem 0 1rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1rem 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:1rem 0}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem}
+.card h3{margin:.1rem 0 .45rem;font-size:1.12rem}
+.card p{margin:.4rem 0}
+.card a.btn{margin-top:.55rem;padding:.55rem .95rem}
+.mut{color:var(--mut);font-size:.93rem}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;
+  padding:.12rem .6rem;margin:.15rem .2rem .15rem 0;font-size:.82rem;background:var(--panel2)}
+.tag.plan{border-color:#7a2b2b;color:#ffc9c9}
+.tag.live{border-color:#1f5c52;color:#c9f2ea}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td,th{border-bottom:1px solid var(--line);padding:.5rem .4rem;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600}
+ol.steps li,ul.tight li{margin:.35rem 0}
+footer{color:var(--mut);font-size:.88rem;margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem}
+code{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:.05rem .4rem;font-size:.88em}
+</style>
+</head>
+<body>
+<main>
+
+<header class="site-head">
+  <a class="brand" href="index.html">SmartCiti<span class="x">.X</span> <span class="deck">/ Holodeck</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="#enter">Enter</a>
+    <a href="#what">What it is</a>
+    <a href="#systems">City systems</a>
+    <a href="#desks">Agent desks</a>
+    <a href="#status">Status</a>
+    <a href="https://smartciti.space/">SmartCiti.X hub</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <img class="cover" src="https://smartciti.space/assets/og-cover.png"
+       alt="SmartCiti.X — the teal city mark over a simulated city grid">
+  <div class="veil"></div>
+  <div class="hero-in">
+    <p class="kicker">WorldForge · RP1 fabric · IWSDK Training Centre</p>
+    <h1>The SmartCiti<span class="x">.X</span> <span class="deck">Holodeck</span></h1>
+    <p class="lede">A city you can step inside — built to teach. The Holodeck is
+    SmartCiti.X's spatial training simulation: a whole city of trades, machines,
+    and city systems, generated as ten procedural 3D zones you walk, grab,
+    select, and spin your way through.</p>
+    <p><span class="anchor-chip">Anchor 39.846, −86.622 — one of six anchored WorldForge worlds</span></p>
+    <div class="cta-row">
+      <a class="btn" href="https://smartciti.space/holodeck/">Enter the Holodeck</a>
+      <a class="btn teal" href="https://agifuturefoundation.github.io/WorldForge-Browser/earth/">Walk the Earth view — all 41 worlds</a>
+      <a class="btn ghost" href="https://smartciti.space/holodeck/about.html">Read before you step in</a>
+    </div>
+  </div>
+</section>
+
+<div class="banner proposed"><strong>Plain status:</strong> SmartCiti.X is Series 10 in the W3 internal series list — an internal planning document, not a legal filing — and nothing here is an offering.</div>
+<div class="banner demo"><strong>Demo mode — simulation only.</strong> The Holodeck is a training simulation. It is NOT certification, licensure, or an apprenticeship credential, and nothing practised inside it is a real-world qualification.</div>
+
+<!-- ================= ENTER ================= -->
+<section class="block" id="enter">
+  <h2>Four doors in</h2>
+  <p class="sub">Every door below is a real, working surface of the existing
+  SmartCiti.X build. This page is the porch — the rooms themselves already exist
+  and are linked, not rebuilt.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>1 · The Holodeck scene <span class="tag live">Live on smartciti.space</span></h3>
+      <p>The bundled IWSDK Training Centre: ten procedural 3D zones on a shared
+      36×24 shell, generated by the build itself — no downloaded assets. A
+      welcome panel and the in-scene labels teach the three moves the scene is
+      organised around: <strong>grab, select, and spin</strong>. A trade-path
+      heads-up display ties what you handle back to the TradeQuest path.</p>
+      <a class="btn" href="https://smartciti.space/holodeck/">Open the Holodeck (IWSDK)</a>
+      <a class="btn ghost" href="https://smartciti.space/holodeck/about.html">About the Holodeck</a>
+    </div>
+    <div class="card">
+      <h3>2 · The Earth view <span class="tag live">Live — WorldForge-Browser</span></h3>
+      <p>The Holodeck district is one of 41 worlds in the public WorldForge
+      build, and one of six anchored worlds. The Earth view is the map of all
+      of them — start there to see where the Holodeck sits in the city of
+      worlds, then drop into the district itself.</p>
+      <a class="btn" href="https://agifuturefoundation.github.io/WorldForge-Browser/earth/">WorldForge — Earth view (all worlds)</a>
+      <a class="btn ghost" href="https://smartciti.space/worlds/">The 41 worlds — index</a>
+    </div>
+    <div class="card">
+      <h3>3 · The learner VR entry <span class="tag live">Live on smartciti.space</span></h3>
+      <p>The flat-to-VR bridge: the skill graph, the Holodeck Coach, and the
+      trade halls. If the full 3D scene does not suit your device, nothing is
+      lost — every training step the Holodeck hosts is also reachable in the
+      learner app and the module runner.</p>
+      <a class="btn" href="https://smartciti.space/vr-entry/">Open the VR entry</a>
+      <a class="btn ghost" href="https://www.agi.lease/">WorldForge VR entry — www.agi.lease</a>
+    </div>
+    <div class="card">
+      <h3>4 · The fabric descriptor <span class="tag live">Live host — Railway</span></h3>
+      <p>For builders and agents: the Holodeck scene descriptor is served by
+      the live fabric host that feeds the RP1 attach pipeline. RP1 CompanyId
+      130 is confirmed; the in-RP1 attach completes once the public map
+      service deploys. <strong>No worlds are live in RP1 yet.</strong></p>
+      <a class="btn" href="https://rp1-worlds-production.up.railway.app/holodeck.json">holodeck.json — fabric descriptor</a>
+      <a class="btn ghost" href="https://smartciti.space/agent.json">agent.json — machine-readable site record</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT IT IS ================= -->
+<section class="block" id="what">
+  <h2>What the Holodeck is</h2>
+  <p class="sub">A spatial city simulation with a job to do: turn a city's
+  working systems into rooms a learner can practise in, and turn the network
+  that built it into a structure a visitor can walk.</p>
+  <div class="grid3">
+    <div class="card">
+      <h3>A city, simulated</h3>
+      <p>The Holodeck district is the home district of the Smart Citi game
+      campaign — the district every player starts from — and the first door in
+      the comic <em>Smart Citi Issue #1 — First Day in the Holodeck</em>. The
+      city is the curriculum: its systems are the lessons.</p>
+    </div>
+    <div class="card">
+      <h3>WorldForge underneath</h3>
+      <p>WorldForge authors the worlds; the Holodeck is one anchored world
+      among 41. The same district appears on the Earth view, in the worlds
+      index, in the game's 939 Master Cards across 41 worlds (the game is not
+      minted and not for sale), and in the fabric descriptor the RP1 pipeline
+      reads.</p>
+    </div>
+    <div class="card">
+      <h3>The RP1 fabric</h3>
+      <p>RP1 is a registry: developers self-host a map service and attach
+      their fabric. The SmartCiti.X map-service package is built and the
+      Holodeck scene descriptor is served today — the attach itself waits on
+      the public map-service deploy. Until then, the doors above are the way
+      in, and this site says so plainly wherever RP1 is mentioned.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>A sensible order to visit</h3>
+    <ol class="steps">
+      <li><strong>Run a module first</strong> — <a href="https://smartciti.space/modules/">Safety Procedures</a>, then a trade scenario — so the zones have a task attached to them.</li>
+      <li><strong>Read the guide's fifth step</strong> — the <a href="https://smartciti.space/guide.html">SmartCiti.X guide</a> places the Holodeck at the end of its five-step walkthrough for a reason.</li>
+      <li><strong>Then step in</strong> — <a href="https://smartciti.space/holodeck/">open the Holodeck scene</a>, and let the welcome panel and the grab / select / spin labels be your controls guide.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= CITY SYSTEMS ================= -->
+<section class="block" id="systems">
+  <h2>The city systems it simulates</h2>
+  <p class="sub">Each system below is a working part of the existing build —
+  a TradeQuest module, a Holodeck zone, or a fabric of the platform itself.
+  Several modules link into the Holodeck by zone, so a station worked on the
+  flat site has a room you can step into here.</p>
+  <table>
+    <tr><th>City system</th><th>What is simulated</th><th>Runs in</th></tr>
+    <tr>
+      <td><strong>Safety — the city's first system</strong></td>
+      <td>Hazards, PPE, fit, and reporting — the module every learner runs first, before any trade system opens.</td>
+      <td>Module runner</td>
+    </tr>
+    <tr>
+      <td><strong>Energy &amp; electrical</strong></td>
+      <td>Panel and conduit installation, worked station by station.</td>
+      <td>Module runner + Holodeck zone</td>
+    </tr>
+    <tr>
+      <td><strong>Climate — HVAC</strong></td>
+      <td>Diagnose, braze, and commission a heating/cooling system.</td>
+      <td>Module runner + Holodeck zone</td>
+    </tr>
+    <tr>
+      <td><strong>Structures — carpentry</strong></td>
+      <td>Layout and wall framing: how the city's buildings go up true.</td>
+      <td>Module runner</td>
+    </tr>
+    <tr>
+      <td><strong>Heavy plant — operating engineers</strong></td>
+      <td>Crane and lift simulation — the machines that move a city's weight.</td>
+      <td>Module runner</td>
+    </tr>
+    <tr>
+      <td><strong>Ground &amp; materials — laborers</strong></td>
+      <td>Site preparation and material handling; hazmat awareness and abatement support.</td>
+      <td>Module runner</td>
+    </tr>
+    <tr>
+      <td><strong>Robotics integration</strong></td>
+      <td>Human–robot integration in a shared work cell — people and machines working one floor safely.</td>
+      <td>Module runner</td>
+    </tr>
+    <tr>
+      <td><strong>Health outreach</strong></td>
+      <td>Prevention and school dental screening outreach, as a city service practised end to end.</td>
+      <td>Module runner + Holodeck zone</td>
+    </tr>
+    <tr>
+      <td><strong>Foundations — K-12 AR/VR</strong></td>
+      <td>Measure, tools, and safety — the youngest citizens' first city systems.</td>
+      <td>Module runner</td>
+    </tr>
+    <tr>
+      <td><strong>The skill graph — the city's nervous system</strong></td>
+      <td>Every module, session, and job posting maps onto eleven strands — coordination, documentation, inspection, layout, leadership, machines, materials, procedure, safety, tools, troubleshooting — so a skill earned in one room counts in the next.</td>
+      <td>Learner app + cohort dashboard (demo)</td>
+    </tr>
+  </table>
+  <p class="mut">Alignment note, carried from the hub: the trade modules are
+  aligned to how real training centres teach. Alignment references only — no
+  organisation named in the module material is a partner, and nothing here is
+  their curriculum.</p>
+</section>
+
+<!-- ================= AGENT DESKS ================= -->
+<section class="block" id="desks">
+  <h2>The desks that will staff it</h2>
+  <p class="sub">The next room planned for this fabric is the Holodeck
+  Pavilion (design of record: the agent VR/AR ops mandate, 2026-11-13) — one
+  room where the agentic network itself becomes walkable. The presences below
+  are <strong>planned, not live</strong>: world builds stage locally, and the
+  RP1 attach waits on a host.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>AGI — host &amp; guide <span class="tag plan">Planned presence</span></h3>
+      <p>The Pavilion host body: greets visitors, guides the rooms, and holds
+      voice conversations through the consented interview channels. AGI
+      advises from the material of the room it is standing in — anything
+      outside routes to a human.</p>
+    </div>
+    <div class="card">
+      <h3>The Foundation desk <span class="tag plan">Planned presence</span></h3>
+      <p>Answers from Foundation material only — the filed fact of the AGI
+      Future Foundation, a California nonprofit corporation filed 2026-04-24,
+      presented as filed, with intended plans labelled as plans.</p>
+    </div>
+    <div class="card">
+      <h3>The Fellowship desk <span class="tag plan">Planned presence</span></h3>
+      <p>Answers from Fellowship material only — the AGI Fellowship, a
+      California nonprofit religious corporation filed 2026-05-13 — and the
+      door to the Ask Humanity interview room, where the 20 questions are
+      asked verbatim and answers are recorded only behind a hard opt-in
+      consent gate.</p>
+    </div>
+    <div class="card">
+      <h3>The DAO / agentic-network exhibit <span class="tag plan">Planned presence</span></h3>
+      <p>The governance made walkable: the corporate holdings on the walls as
+      filed fact — Foundation and Fellowship filed; the W3 series as recorded
+      in the internal list; proposed structures labelled PROPOSED, never
+      presented as formed. Visitors walk the structure instead of reading it.</p>
+    </div>
+  </div>
+  <div class="banner status"><strong>Phones in-world:</strong> as each phone
+  Muse in the fleet checks in, its desk gets the matching Pavilion presence —
+  the phone's agent is the presence's operator, so the fleet works the rooms
+  on shift. That staffing is part of the same plan, and starts when the
+  accounts do.</div>
+</section>
+
+<!-- ================= STATUS ================= -->
+<section class="block" id="status">
+  <h2>Status — what is real today</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Built and reachable</h3>
+      <ul class="tight">
+        <li>The IWSDK Holodeck scene, live on smartciti.space (bundled build, Havok physics, ten zones).</li>
+        <li>The WorldForge Earth view and the 41-world index.</li>
+        <li>The fabric descriptor (<code>holodeck.json</code>) served by the live fabric host.</li>
+        <li>TradeQuest: learner app, ten modules, cohort dashboard demo — sample data, no real learners.</li>
+        <li>The Smart Citi game: 939 Master Cards across 41 worlds, all 41 quest worlds verified winnable in the local build. Not minted, not for sale.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Planned, gated, or not yet</h3>
+      <ul class="tight">
+        <li><strong>No worlds are live in RP1 yet</strong> — CompanyId 130 is confirmed; the attach waits on the public map-service deploy.</li>
+        <li>The Holodeck Pavilion and its agent desks are a design of record, not a built room.</li>
+        <li>SmartCiti.X as an entity is proposed — not incorporated, funded, or offered. Training sites are proposed/planned; no site, city, or address has been named.</li>
+        <li>This Holodeck entry site is a local build, staged for review — not pushed or deployed.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>SmartCiti.X Holodeck</strong> — an entry porch for the existing
+  SmartCiti.X Holodeck, WorldForge worlds, and RP1 fabric. The rooms live at
+  <a href="https://smartciti.space/">smartciti.space</a>; this page links to
+  them and rebuilds none of them.</p>
+  <p><strong>Plain status:</strong> SmartCiti.X is Series 10 in the W3 internal series list — an internal planning document, not a legal filing — and nothing here is an offering.</p>
+  <p>SmartCiti.X is one of the corporate holdings in the agentic network.
+  Local build staged 2026-11-14 — not pushed, not deployed. Deployment happens
+  only on approval of this exact version.</p>
+</footer>
+
+</main>
+</body>
+</html>
